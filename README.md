@@ -11,12 +11,13 @@ Files are stored in year/month/day folders. Each 'day' folder contains original 
 
 Each day folder contains following files:
 
-* `wav` - original wav files. The file ending with `*_mix.wav` is final mastered version, and it also has ISRC code embedded.
+* `wav` - original wav files. The `*_mix.wav` is final mastered version, and it also has ISRC code embedded.
 * `mp4` - video file for the track, created for the youtube upload.
 * `png` - original unedited image used for the cover.
 * `pxd` - Pixelmator file for the cover image.
-* `jpg` - Final cover image.
-* `README.md` - description of the track.
+* `jpg` - cover image containing both the image/photo and the overlaid text with artist/title, the `*_cover.jpg` file is the final version.
+* `track.yml` - metadata for the track (title, description, links, ISRC code, etc.) that is used for the web site.
+* `README.md` - notes about the track.
 * Ablton Live project files are stored in a subfolder, which were used to make the mastered `*_mix.wav` file.
 
 
