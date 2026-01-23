@@ -2,9 +2,23 @@
 
 A web site for sausage skin music:
 
-* [music](music) - source files (wav, mp3, cover images, videos, etc.). Files are store in year/month/day folders. For example, `music/a2025/a03_marmite` which contains
-music/a2024/a06_june/a20_deadlift
-* [web](web) - generated static web site files.
+* [music](music) folder - source files (wav, cover images, videos, etc.)
+* [web](web) folder - generated static web site files.
+
+## [music](music) folder structure
+
+Files are stored in year/month/day folders. Each 'day' folder contains original file for a single track. For example, `music/a2024/a11_nov/a05_cloven_hoofed` contains original files for Cloven Hoofed track.
+
+Each day folder contains following files:
+
+* `wav` - original wav files. The file ending with `*_mix.wav` is final mastered version, and it also has ISRC code embedded.
+* `mp4` - video file for the track, created for the youtube upload.
+* `png` - original unedited image used for the cover.
+* `pxd` - Pixelmator file for the cover image.
+* `jpg` - Final cover image.
+* `README.md` - description of the track.
+* Ablton Live project files are stored in a subfolder, which were used to make the mastered `*_mix.wav` file.
+
 
 ## Setup
 
