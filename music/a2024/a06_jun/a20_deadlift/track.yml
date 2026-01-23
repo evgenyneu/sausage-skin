@@ -1,5 +1,8 @@
 title: "deadlift"
-album: "conventional music for the gym"
+
+album:
+  track_number: 1
+  name: "conventional music for the gym"
 
 links:
   youtube: "https://youtu.be/2FUB1qJmrkE"
