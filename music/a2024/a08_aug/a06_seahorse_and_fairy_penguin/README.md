@@ -1,0 +1,1 @@
+ffmpeg -loop 1 -i seahorse_and_fairy_penguin.jpg -i seahorse_and_fairy_penguin_playing_in_iridescent_waters_mix.wav -c:v libx264 -tune stillimage -c:a aac -b:a 320k -pix_fmt yuv420p -shortest seahorse_and_fairy_penguin_playing_in_iridescent_waters.mp4

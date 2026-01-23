@@ -1,0 +1,1 @@
+ffmpeg -loop 1 -i look_for_the_one_who_is_looking.jpg -i look_for_the_one_who_is_looking_mix.wav -c:v libx264 -tune stillimage -c:a aac -b:a 320k -pix_fmt yuv420p -shortest look_for_the_one_who_is_looking.mp4

@@ -1,0 +1,7 @@
+[project]
+name = "sausage-skin"
+version = "0.1.0"
+description = "Web site for sausage skin music"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
