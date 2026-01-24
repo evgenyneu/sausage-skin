@@ -9,7 +9,7 @@ JPEG_QUALITY = 3
 
 
 def build_thumbnail_command(
-    *, cover: Path, thumbnail: Path, width: int = THUMBNAIL_WIDTH
+    *, cover: Path, thumbnail: Path, width: int = THUMBNAIL_WIDTH, quality: int = JPEG_QUALITY
 ) -> list[str]:
     return [
         "ffmpeg",
@@ -19,13 +19,17 @@ def build_thumbnail_command(
         "-vf",
         f"scale={width}:-1",
         "-q:v",
-        str(JPEG_QUALITY),
+        str(quality),
         str(thumbnail),
     ]
 
 
-def generate_thumbnail(*, cover: Path, thumbnail: Path, width: int = THUMBNAIL_WIDTH) -> None:
-    command = build_thumbnail_command(cover=cover, thumbnail=thumbnail, width=width)
+def generate_thumbnail(
+    *, cover: Path, thumbnail: Path, width: int = THUMBNAIL_WIDTH, quality: int = JPEG_QUALITY
+) -> None:
+    command = build_thumbnail_command(
+        cover=cover, thumbnail=thumbnail, width=width, quality=quality
+    )
 
     try:
         run(command, check=True, capture_output=True)

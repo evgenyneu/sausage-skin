@@ -27,3 +27,13 @@ def test_build_thumbnail_command_custom_width(tmp_path: Path) -> None:
     assert command[5] == "scale=200:-1"
     assert command[6] == "-q:v"
     assert command[7] == str(JPEG_QUALITY)
+
+
+def test_build_thumbnail_command_custom_quality(tmp_path: Path) -> None:
+    cover = tmp_path / "cover.jpg"
+    thumbnail = tmp_path / "thumb.jpg"
+
+    command = build_thumbnail_command(cover=cover, thumbnail=thumbnail, quality=5)
+
+    assert command[6] == "-q:v"
+    assert command[7] == "5"
