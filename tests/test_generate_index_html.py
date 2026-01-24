@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from generate.main import generate_index_html
-from generate.main import render_index_html
+from generate.index_html import generate_index_html
+from generate.index_html import render_index_html
 
 
 def test_render_index_html_replaces_placeholder() -> None:

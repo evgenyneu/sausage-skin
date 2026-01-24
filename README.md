@@ -34,7 +34,7 @@ uv sync
 Generate the static web site files in the [web](web) folder from the source files in the [music](music) folder.
 
 ```sh
-uv run python src/generate/main.py
+uv run python -m generate.main
 ```
 
 ## Run tests
