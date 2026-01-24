@@ -1,0 +1,27 @@
+from pathlib import Path
+
+from generate.main import generate_index_html
+from generate.main import render_index_html
+
+
+def test_render_index_html_replaces_placeholder() -> None:
+    layout_html = "<html><body>{{ body }}</body></html>"
+
+    result = render_index_html(layout_html=layout_html, body_html="<div>Hello World</div>")
+
+    assert result == "<html><body><div>Hello World</div></body></html>"
+
+
+def test_generate_index_html_writes_output(tmp_path: Path) -> None:
+    repo_root = tmp_path
+
+    layout_path = repo_root / "src" / "web" / "layout" / "index.html"
+
+    layout_path.parent.mkdir(parents=True, exist_ok=True)
+    layout_path.write_text("<html><body>{{ body }}</body></html>", encoding="utf-8")
+
+    generate_index_html(repo_root=repo_root)
+
+    output_path = repo_root / "web" / "index.html"
+
+    assert output_path.read_text(encoding="utf-8") == "<html><body><div>Hello World</div></body></html>"

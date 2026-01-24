@@ -37,6 +37,12 @@ Generate the static web site files in the [web](web) folder from the source file
 uv run python src/generate/main.py
 ```
 
+## Run tests
+
+```sh
+uv run pytest
+```
+
 
 ## No rights reserved
 
