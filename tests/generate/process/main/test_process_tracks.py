@@ -9,7 +9,14 @@ from src.generate.yaml.main import TrackMetadata
 def test_process_tracks_empty_list(tmp_path: Path) -> None:
     repo_root = tmp_path
 
+    src_tracks = repo_root / "src" / "web" / "tracks"
+    src_tracks.mkdir(parents=True, exist_ok=True)
+
     process_tracks(tracks=[], repo_root=repo_root)
+
+    web_tracks = repo_root / "web" / "tracks"
+
+    assert web_tracks.exists()
 
 
 def test_process_tracks_single_track(tmp_path: Path) -> None:
@@ -43,3 +50,16 @@ def test_process_tracks_single_track(tmp_path: Path) -> None:
     thumbnail = repo_root / "src" / "web" / "tracks" / url / "images" / "cover_600.jpg"
 
     assert thumbnail.exists()
+
+    web_thumbnail = repo_root / "web" / "tracks" / url / "images" / "cover_600.jpg"
+    web_cover = repo_root / "web" / "tracks" / url / "images" / "cover.jpg"
+
+    assert web_thumbnail.exists()
+    assert web_cover.exists()
+
+    assert web_thumbnail.read_bytes() == thumbnail.read_bytes()
+
+    assert (
+        web_cover.read_bytes()
+        == (repo_root / "src" / "web" / "tracks" / url / "images" / "cover.jpg").read_bytes()
+    )

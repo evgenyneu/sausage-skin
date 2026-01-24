@@ -12,6 +12,9 @@ def test_main_runs_pipeline(tmp_path: Path) -> None:
     layout_path.parent.mkdir(parents=True, exist_ok=True)
     layout_path.write_text("<html><body>{{ body }}</body></html>", encoding="utf-8")
 
+    src_tracks = repo_root / "src" / "web" / "tracks"
+    src_tracks.mkdir(parents=True, exist_ok=True)
+
     exit_code = main(repo_root=repo_root, music_root=music_root)
 
     output_path = repo_root / "web" / "index.html"
