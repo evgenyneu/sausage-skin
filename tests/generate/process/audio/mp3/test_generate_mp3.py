@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from subprocess import run
 
@@ -38,6 +39,9 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
 
     assert codec == "mp3"
 
+    # Verify duration
+    # --------------
+
     wav_duration_result = run(
         [
             "ffprobe",
@@ -73,3 +77,39 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
 
     assert abs(mp3_duration - 4.0) < 0.2
     assert abs(wav_duration - 4.0) < 0.2
+
+    # Verify metadata
+    # -------------
+
+    metadata_result = run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_format",
+            "-show_streams",
+            "-of",
+            "json",
+            str(mp3),
+        ],
+        check=True,
+        capture_output=True,
+    )
+
+    metadata = json.loads(metadata_result.stdout.decode())
+
+    # Verify stream bit rate
+    # ---------------------
+
+    stream_bit_rate = int(metadata["streams"][0]["bit_rate"])
+    assert abs(stream_bit_rate - 245000) < 10000
+
+    # Ensure ISRC tags are copied from wav file
+    # ------
+
+    format_tags = metadata["format"]["tags"]
+    isrc = format_tags.get("ISRC")
+    tsrc = format_tags.get("TSRC")
+
+    assert isrc == "AUQ1W2400999"
+    assert tsrc == "AUQ1W2400999"
