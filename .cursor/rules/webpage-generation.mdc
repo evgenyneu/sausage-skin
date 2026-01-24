@@ -15,7 +15,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 
 ## Process Flow
 
-### 1. Discover Tracks
+### Discover Tracks
 
 * Scan `music/` directory recursively
 * Find all day folders containing `track.yml`
@@ -23,9 +23,9 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Extract date from folder path: `music/a{year}/a{month}_{name}/a{day}_{name}/`
   * Example: `music/a2024/a11_nov/a05_cloven_hoofed/` → date: 2024-11-05
 
-### 2. Process Each Track
+### Process Each Track
 
-#### 2.1 Audio Processing (Cache Check)
+#### Audio Processing
 
 * Check if `src/web/tracks/{url}/audio/track.mp3` exists → skip if found
 * Locate `*_mix.wav` in track directory
@@ -33,7 +33,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Convert WAV → MP3 using `ffmpeg` via `subprocess`
 * Save to: `src/web/tracks/{url}/audio/track.mp3`
 
-#### 2.2 Image Processing (Cache Check)
+#### Image Processing
 
 * Check if `src/web/tracks/{url}/images/cover.jpg` exists → skip if found
 * Locate `*_cover.jpg` in track directory
@@ -42,60 +42,42 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Generate thumbnail (600px width, constant in Python script)
 * Save to: `src/web/tracks/{url}/images/cover_600.jpg`
 
-### 3. Copy Cache to Output
+### Copy Cache to Output
 
-* Copy entire `src/web/tracks/` directory to `web/tracks/`
+* Copy entire `src/web/tracks/` directory to `web/`
 
-### 4. Generate Index Page
+### Home page
 
-#### 4.1 Collect Track Data
+* Generate `web/index.html` using template at `src/web/layout/index.html`.
+* Template contains: `<html>`, `<head>`, `<body>` and a body content placeholder `{{ body }}`.
+* Replace `{{ body }}` with grid of track thumbnails `cover_600.jpg` (responsive, no margins).
+* Responsive CSS grid: more on wide screens, fewer on narrow (1-2 on phones).
+* Click thumbnail → open track page.
 
-* Load all processed tracks
-* Sort chronologically by date (newest first) extracted from folder path
-* Extract: title, url, cover thumbnail path, audio path
+### Output Files
 
-#### 4.2 HTML Generation
-
-* Load template: `src/web/layout/index.html`
-* Template contains: `<html>`, `<head>`, but `<body>` is placeholder
-* Generate `<body>` with:
-  * Track grid (responsive, no margins)
-  * Player controls bar (fixed bottom)
-
-#### 4.3 Track Grid
-
-* Display cover thumbnails (`cover_600.jpg`)
-* Responsive CSS grid: many on wide screens, few on narrow (2-3 on phone)
-* Click thumbnail → play track in player
-
-#### 4.4 Player Controls
-
-* Fixed bottom bar (always visible)
-* Controls: play/pause, forward (next track), backward (previous track)
-* JavaScript handles playback and track navigation
-
-### 5. Output Files
-
-* `web/index.html` - Main page
-* `web/tracks/{url}/audio/track.mp3` - Audio per track
-* `web/tracks/{url}/images/cover.jpg` - Cover per track
-* `web/tracks/{url}/images/cover_600.jpg` - Thumbnail per track
-* `web/css/*.css` - Stylesheets
 * `web/js/*.js` - JavaScript
+* `web/css/*.css` - Stylesheets
+* `web/index.html` - Main page
+* `web/{url}/index.html` - Track page
+* `web/{url}/audio/track.mp3` - Track audio
+* `web/{url}/images/cover.jpg` - Track cover
+* `web/{url}/images/cover_600.jpg` - Track cover thumbnail
+
 
 ## Code style
 
 * The code needs to be minimal, readable, we use KISS principle.
-* Use small python and javascript files, with few function grouped by functionality in a single file. Arrange similar files in folders.Make small function that do one thing.
+* Use small Python and JavaScript files, with few function grouped by functionality in a single file. Arrange similar files in folders. Make small function that do one thing.
 * Code needs to be self-explanatory without a need of comments. Only add comments if the code is non-obvious.
 * Don't use classes/OOP, write code as functions.
-* Don't use any external Python or JavaScript libraries, we will use only what's available in Python 3.14 and the browser's JavaScript.
-* Only python dependency we use it pytest to test the code. All code needs to be tested.
-* Only dependency is ffmpeg that we will use to make mp3 and thumbnail jpg files.
+* Try not to use external Python or JavaScript libraries, we will use only what's available in Python 3.14 and the browser's JavaScript. Only add a library if absolutely necessary.
+* All code needs to be tested.
+* An external dependency is ffmpeg for making mp3 and thumbnail jpg files.
 * Generate one small piece of code at a time, test it and ask for instructions on what to do next.
-* Don't name functions starting with underscore _. All functions are public and should be tested.
+* Don't name functions starting with underscores `_`. All functions are public and should be tested.
 * The tests should be in same subdirs as the files they are testing. For example for src/generate/yaml/validate.py the tests should be in tests/generate/yaml/validate/ dir and then each function should be tested in separate test file there: test_require_non_blank.py and  test_validate_track_yml.py
 
-## In chat
+## Concise responses
 
-In chat responses be very concise. No need to generate summary of what you done. Just make the code changes, don't write me in text what changes you made since I can already see the changes in git diff.
+Be very concise in your responses. After you made code changes no need to generate summary of what you've done. Just write 'We are done :D'.
