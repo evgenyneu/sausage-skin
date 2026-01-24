@@ -3,9 +3,7 @@ from os import cpu_count
 
 from src.generate.tracks.models.track_info import TrackInfo
 
-
-def process_single_track(*, track: TrackInfo) -> None:
-    print(f"Processing track {track.track_dir}")
+from .single import process_single_track
 
 
 def process_tracks(*, tracks: list[TrackInfo]) -> None:
