@@ -8,4 +8,4 @@ def log(message: str) -> None:
 
 def log_dot() -> None:
     if not is_testing:
-        print(".", end="", flush=True)
+        print("\033[36m.\033[0m", end="", flush=True)
