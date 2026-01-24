@@ -2,6 +2,7 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 from os import cpu_count
 from pathlib import Path
 
+from src.generate.log.log import log_dot, log
 from src.generate.tracks.models.track_info import TrackInfo
 
 from .single import process_single_track
@@ -21,5 +22,8 @@ def process_tracks(*, tracks: list[TrackInfo], repo_root: Path) -> None:
 
             try:
                 future.result()
+                log_dot()
             except Exception as e:
                 raise RuntimeError(f"Failed to process track {track.track_dir}: {e}") from e
+
+    log("")

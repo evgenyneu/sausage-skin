@@ -20,7 +20,7 @@ def main(
 
     try:
         tracks = discover_tracks(music_root=music_root)
-        log(f"Processing {len(tracks)} tracks...")
+        log(f"Processing {len(tracks)} tracks")
         process_tracks(tracks=tracks, repo_root=repo_root)
         render_html(tracks=tracks, repo_root=repo_root)
         log("We are done")
