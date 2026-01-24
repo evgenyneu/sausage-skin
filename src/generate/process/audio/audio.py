@@ -2,6 +2,7 @@ from pathlib import Path
 
 from src.generate.tracks.validate import require_single_file
 from src.generate.process.cover.thumb import THUMBNAIL_WIDTH
+from .metadata import AudioMetadata
 from .mp3 import generate_mp3
 
 
@@ -26,9 +27,7 @@ def build_cover_image_path(*, repo_root: Path, url: str) -> Path:
     return images_dir / f"cover_{THUMBNAIL_WIDTH}.jpg"
 
 
-def process_audio(
-    *, track_dir: Path, repo_root: Path, url: str, artist: str, title: str, year: int
-) -> None:
+def process_audio(*, track_dir: Path, repo_root: Path, url: str, metadata: AudioMetadata) -> None:
     source_wav = find_mix_wav(track_dir=track_dir)
 
     mp3_path = build_audio_output_path(repo_root=repo_root, url=url)
@@ -37,6 +36,4 @@ def process_audio(
     if not mp3_path.exists():
         cover_path = build_cover_image_path(repo_root=repo_root, url=url)
 
-        generate_mp3(
-            wav=source_wav, mp3=mp3_path, artist=artist, title=title, year=year, cover=cover_path
-        )
+        generate_mp3(wav=source_wav, mp3=mp3_path, cover=cover_path, metadata=metadata)

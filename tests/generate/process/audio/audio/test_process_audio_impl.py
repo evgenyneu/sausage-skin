@@ -2,6 +2,7 @@ from pathlib import Path
 from subprocess import run
 
 from src.generate.process.audio.audio import process_audio as process_audio_impl
+from src.generate.process.audio.metadata import AudioMetadata
 
 
 def test_process_audio_creates_mp3(tmp_path: Path) -> None:
@@ -24,14 +25,11 @@ def test_process_audio_creates_mp3(tmp_path: Path) -> None:
     cover_600 = images_dir / "cover_600.jpg"
     cover_600.write_bytes(cover_source.read_bytes())
 
-    process_audio_impl(
-        track_dir=track_dir,
-        repo_root=repo_root,
-        url=url,
-        artist="sausage skin",
-        title="Test Track",
-        year=2024,
+    metadata = AudioMetadata(
+        artist="sausage skin", title="Test Track", year=2024, album=None, track_number=None
     )
+
+    process_audio_impl(track_dir=track_dir, repo_root=repo_root, url=url, metadata=metadata)
 
     mp3_dest = repo_root / "src" / "web" / "tracks" / url / "audio" / "track.mp3"
 
@@ -78,13 +76,10 @@ def test_process_audio_skips_when_asset_exists(tmp_path: Path) -> None:
     mp3_dest = audio_dir / "track.mp3"
     mp3_dest.write_bytes(b"existing-mp3-data")
 
-    process_audio_impl(
-        track_dir=track_dir,
-        repo_root=repo_root,
-        url=url,
-        artist="sausage skin",
-        title="Test Track",
-        year=2024,
+    metadata = AudioMetadata(
+        artist="sausage skin", title="Test Track", year=2024, album=None, track_number=None
     )
+
+    process_audio_impl(track_dir=track_dir, repo_root=repo_root, url=url, metadata=metadata)
 
     assert mp3_dest.read_bytes() == b"existing-mp3-data"

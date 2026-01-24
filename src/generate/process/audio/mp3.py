@@ -2,12 +2,17 @@ from pathlib import Path
 from subprocess import CalledProcessError, run
 
 from src.generate.errors import ProgramError
+from .metadata import AudioMetadata
 
 
 def build_mp3_command(
-    *, wav: Path, mp3: Path, artist: str, title: str, year: int, cover: Path
+    *,
+    wav: Path,
+    mp3: Path,
+    cover: Path,
+    metadata: AudioMetadata,
 ) -> list[str]:
-    return [
+    command = [
         "ffmpeg",
         "-y",
         "-i",
@@ -27,19 +32,32 @@ def build_mp3_command(
         "-q:a",
         "0",
         "-metadata",
-        f"artist={artist}",
+        f"artist={metadata.artist}",
         "-metadata",
-        f"title={title}",
+        f"title={metadata.title}",
         "-metadata",
-        f"date={year}",
-        str(mp3),
+        f"date={metadata.year}",
     ]
 
+    if metadata.album:
+        command.extend(["-metadata", f"album={metadata.album}"])
 
-def generate_mp3(*, wav: Path, mp3: Path, artist: str, title: str, year: int, cover: Path) -> None:
-    command = build_mp3_command(
-        wav=wav, mp3=mp3, artist=artist, title=title, year=year, cover=cover
-    )
+    if metadata.track_number is not None:
+        command.extend(["-metadata", f"track={metadata.track_number}"])
+
+    command.append(str(mp3))
+
+    return command
+
+
+def generate_mp3(
+    *,
+    wav: Path,
+    mp3: Path,
+    cover: Path,
+    metadata: AudioMetadata,
+) -> None:
+    command = build_mp3_command(wav=wav, mp3=mp3, cover=cover, metadata=metadata)
 
     try:
         run(command, check=True, capture_output=True)

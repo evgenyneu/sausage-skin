@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from subprocess import run
 
+from src.generate.process.audio.metadata import AudioMetadata
 from src.generate.process.audio.mp3 import generate_mp3
 from src.generate.process.cover.thumb import THUMBNAIL_WIDTH, generate_thumbnail
 
@@ -22,9 +23,11 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
 
     mp3 = tmp_path / "track.mp3"
 
-    generate_mp3(
-        wav=wav, mp3=mp3, artist="sausage skin", title="Test Track", year=2024, cover=cover
+    metadata = AudioMetadata(
+        artist="sausage skin", title="Test Track", year=2024, album="Test Album", track_number=1
     )
+
+    generate_mp3(wav=wav, mp3=mp3, cover=cover, metadata=metadata)
 
     assert mp3.exists()
 
@@ -124,12 +127,14 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
     assert isrc == "AUQ1W2400999"
     assert tsrc == "AUQ1W2400999"
 
-    # Verify artist, title, and date tags
+    # Verify artist, title, date, album, and track tags
     # ---------------------------
 
     assert format_tags.get("artist") == "sausage skin"
     assert format_tags.get("title") == "Test Track"
     assert format_tags.get("date") == "2024"
+    assert format_tags.get("album") == "Test Album"
+    assert format_tags.get("track") == "1"
 
     # Verify embedded cover image
     # ---------------------------

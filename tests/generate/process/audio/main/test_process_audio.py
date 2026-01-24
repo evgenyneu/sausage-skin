@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from src.generate.process.audio.main import process_audio
+from src.generate.process.audio.metadata import AudioMetadata
 
 
 def test_process_audio_calls_implementation(tmp_path: Path) -> None:
@@ -23,14 +24,11 @@ def test_process_audio_calls_implementation(tmp_path: Path) -> None:
     cover_600 = images_dir / "cover_600.jpg"
     cover_600.write_bytes(cover_source.read_bytes())
 
-    process_audio(
-        track_dir=track_dir,
-        repo_root=repo_root,
-        url=url,
-        artist="sausage skin",
-        title="Test Track",
-        year=2024,
+    metadata = AudioMetadata(
+        artist="sausage skin", title="Test Track", year=2024, album=None, track_number=None
     )
+
+    process_audio(track_dir=track_dir, repo_root=repo_root, url=url, metadata=metadata)
 
     mp3_dest = repo_root / "src" / "web" / "tracks" / url / "audio" / "track.mp3"
 

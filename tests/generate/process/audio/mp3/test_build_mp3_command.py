@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from src.generate.process.audio.metadata import AudioMetadata
 from src.generate.process.audio.mp3 import build_mp3_command
 
 
@@ -8,9 +9,11 @@ def test_build_mp3_command(tmp_path: Path) -> None:
     mp3 = tmp_path / "track.mp3"
     cover = tmp_path / "cover_600.jpg"
 
-    command = build_mp3_command(
-        wav=wav, mp3=mp3, artist="sausage skin", title="Test Track", year=2024, cover=cover
+    metadata = AudioMetadata(
+        artist="sausage skin", title="Test Track", year=2024, album="Test Album", track_number=1
     )
+
+    command = build_mp3_command(wav=wav, mp3=mp3, cover=cover, metadata=metadata)
 
     assert command[:3] == ["ffmpeg", "-y", "-i"]
     assert command[3] == str(wav)
@@ -34,4 +37,8 @@ def test_build_mp3_command(tmp_path: Path) -> None:
     assert command[21] == "title=Test Track"
     assert command[22] == "-metadata"
     assert command[23] == "date=2024"
-    assert command[24] == str(mp3)
+    assert command[24] == "-metadata"
+    assert command[25] == "album=Test Album"
+    assert command[26] == "-metadata"
+    assert command[27] == "track=1"
+    assert command[28] == str(mp3)
