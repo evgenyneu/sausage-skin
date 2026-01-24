@@ -13,8 +13,8 @@ def render_track_grid(*, tracks: list[TrackInfo]) -> str:
 
     for track in sorted_tracks:
         url = track.metadata.url
-        thumbnail_path = f"tracks/{url}/images/cover_600.jpg"
-        track_url = f"tracks/{url}/"
+        thumbnail_path = f"{url}/images/cover_600.jpg"
+        track_url = f"{url}/"
 
         items.append(
             f'<a href="{track_url}"><img class="TrackGrid-Image" src="{thumbnail_path}" alt="{track.metadata.title}" /></a>'

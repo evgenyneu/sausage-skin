@@ -14,10 +14,6 @@ def test_process_tracks_empty_list(tmp_path: Path) -> None:
 
     process_tracks(tracks=[], repo_root=repo_root)
 
-    web_tracks = repo_root / "web" / "tracks"
-
-    assert web_tracks.exists()
-
 
 def test_process_tracks_single_track(tmp_path: Path) -> None:
     project_root = Path(__file__).resolve().parents[4]
@@ -66,8 +62,8 @@ def test_process_tracks_single_track(tmp_path: Path) -> None:
 
     assert thumbnail.exists()
 
-    web_thumbnail = repo_root / "web" / "tracks" / url / "images" / "cover_600.jpg"
-    web_cover = repo_root / "web" / "tracks" / url / "images" / "cover.jpg"
+    web_thumbnail = repo_root / "web" / url / "images" / "cover_600.jpg"
+    web_cover = repo_root / "web" / url / "images" / "cover.jpg"
 
     assert web_thumbnail.exists()
     assert web_cover.exists()
