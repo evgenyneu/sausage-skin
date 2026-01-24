@@ -1,4 +1,5 @@
 from pathlib import Path
+from sys import exit as sys_exit
 
 from .index_html import generate_index_html
 from .process.main import process_tracks
@@ -10,7 +11,7 @@ from .yaml.errors import YamlValidationError
 def main(
     repo_root: Path | None = None,
     music_root: Path | None = None,
-) -> None:
+) -> int:
     if repo_root is None:
         repo_root = Path.cwd()
 
@@ -22,9 +23,11 @@ def main(
         print(f"Discovered {len(tracks)} tracks")
         process_tracks(tracks=tracks)
         generate_index_html(repo_root=repo_root)
+        return 0
     except (TrackValidationError, YamlValidationError) as error:
         print(f"Error: {error}")
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    sys_exit(main())

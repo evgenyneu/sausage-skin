@@ -12,7 +12,7 @@ def test_main_runs_pipeline(tmp_path: Path) -> None:
     layout_path.parent.mkdir(parents=True, exist_ok=True)
     layout_path.write_text("<html><body>{{ body }}</body></html>", encoding="utf-8")
 
-    main(repo_root=repo_root, music_root=music_root)
+    exit_code = main(repo_root=repo_root, music_root=music_root)
 
     output_path = repo_root / "web" / "index.html"
 
@@ -21,3 +21,4 @@ def test_main_runs_pipeline(tmp_path: Path) -> None:
     index_html = output_path.read_text(encoding="utf-8")
 
     assert "<div>Hello World</div>" in index_html
+    assert exit_code == 0
