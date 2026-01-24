@@ -42,9 +42,15 @@ def generate_thumbnail(*, cover: Path, thumbnail: Path, width: int = THUMBNAIL_W
         raise ProgramError(message) from error
 
 
-def generate_thumbnail_for_track(*, track_dir: Path, width: int = THUMBNAIL_WIDTH) -> Path:
+def generate_thumbnail_for_track(
+    *, track_dir: Path, url: str, repo_root: Path, width: int = THUMBNAIL_WIDTH
+) -> Path:
     cover = find_cover_image(track_dir=track_dir)
-    thumbnail = cover.with_name(f"{cover.stem}_{width}{cover.suffix}")
+
+    thumbnail_dir = repo_root / "src" / "web" / "tracks" / url / "images"
+    thumbnail_dir.mkdir(parents=True, exist_ok=True)
+
+    thumbnail = thumbnail_dir / f"cover_{width}.jpg"
 
     if not thumbnail.exists():
         generate_thumbnail(cover=cover, thumbnail=thumbnail, width=width)

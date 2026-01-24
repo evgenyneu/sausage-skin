@@ -20,7 +20,7 @@ def main(
     try:
         tracks = discover_tracks(music_root=music_root)
         print(f"Discovered {len(tracks)} tracks")
-        process_tracks(tracks=tracks)
+        process_tracks(tracks=tracks, repo_root=repo_root)
         generate_index_html(repo_root=repo_root)
         return 0
     except ProgramError as error:
