@@ -1,14 +1,18 @@
 from pathlib import Path
 
+from .errors import TrackValidationError
+
 
 def require_single_file(*, directory: Path, pattern: str, description: str) -> Path:
     matches = list(directory.glob(pattern))
 
     if not matches:
-        raise ValueError(f"Missing {description} matching '{pattern}' in {directory}")
+        raise TrackValidationError(f"Missing {description} matching '{pattern}' in {directory}")
 
     if len(matches) > 1:
-        raise ValueError(f"Found multiple {description} matching '{pattern}' in {directory}")
+        raise TrackValidationError(
+            f"Found multiple {description} matching '{pattern}' in {directory}"
+        )
 
     return matches[0]
 

@@ -1,0 +1,2 @@
+class YamlValidationError(Exception):
+    pass

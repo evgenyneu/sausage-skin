@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from src.generate.yaml.errors import YamlValidationError
 from src.generate.yaml.validate import validate_track_yml
 
 
@@ -11,7 +12,7 @@ def test_validate_track_yml_missing_title() -> None:
         "description": "Some description",
     }
 
-    with pytest.raises(ValueError, match="Missing required field 'title'"):
+    with pytest.raises(YamlValidationError, match="Missing required field 'title'"):
         validate_track_yml(data=data, track_yml_path=Path("track.yml"))
 
 
@@ -21,7 +22,7 @@ def test_validate_track_yml_missing_description() -> None:
         "url": "test",
     }
 
-    with pytest.raises(ValueError, match="Missing required field 'description'"):
+    with pytest.raises(YamlValidationError, match="Missing required field 'description'"):
         validate_track_yml(data=data, track_yml_path=Path("track.yml"))
 
 
@@ -31,19 +32,19 @@ def test_validate_track_yml_missing_url() -> None:
         "description": "test description",
     }
 
-    with pytest.raises(ValueError, match="Missing required field 'url'"):
+    with pytest.raises(YamlValidationError, match="Missing required field 'url'"):
         validate_track_yml(data=data, track_yml_path=Path("track.yml"))
 
 
 def test_validate_track_yml_empty_fields() -> None:
     data = {"title": "", "url": "", "description": ""}
 
-    with pytest.raises(ValueError, match="Missing required field 'title'"):
+    with pytest.raises(YamlValidationError, match="Missing required field 'title'"):
         validate_track_yml(data=data, track_yml_path=Path("track.yml"))
 
 
 def test_validate_track_yml_whitespace_fields() -> None:
     data = {"title": "   ", "url": "   ", "description": "   "}
 
-    with pytest.raises(ValueError, match="Missing required field 'title'"):
+    with pytest.raises(YamlValidationError, match="Missing required field 'title'"):
         validate_track_yml(data=data, track_yml_path=Path("track.yml"))

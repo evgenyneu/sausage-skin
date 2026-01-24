@@ -1,11 +1,13 @@
 from pathlib import Path
 
+from .errors import YamlValidationError
+
 
 def require_non_blank(*, data: dict, key: str, track_yml_path: Path) -> None:
     value = data.get(key)
 
     if not value or not str(value).strip():
-        raise ValueError(f"Missing required field '{key}' in {track_yml_path}")
+        raise YamlValidationError(f"Missing required field '{key}' in {track_yml_path}")
 
 
 def validate_track_yml(*, data: dict, track_yml_path: Path) -> None:
