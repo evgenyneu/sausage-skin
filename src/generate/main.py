@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .discover_tracks import discover_tracks, ensure_unique_urls
+from .files.main import discover_tracks
 from .index_html import generate_index_html
 from .process.main import process_tracks
 
@@ -12,8 +12,6 @@ def main() -> None:
     tracks = discover_tracks(music_root=music_root)
 
     print(f"Discovered {len(tracks)} tracks")
-
-    ensure_unique_urls(tracks=tracks)
 
     process_tracks(tracks=tracks)
 

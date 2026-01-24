@@ -3,12 +3,10 @@ from pathlib import Path
 
 import pytest
 
-from src.generate.discover_tracks import (
-    TrackInfo,
-    discover_tracks,
-    ensure_unique_urls,
-    extract_date_from_path,
-)
+from src.generate.files.dates import extract_date_from_path
+from src.generate.files.main import discover_tracks
+from src.generate.files.tracks import TrackInfo
+from src.generate.files.urls import ensure_unique_urls
 from src.generate.yaml.main import TrackMetadata
 
 

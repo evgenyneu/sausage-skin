@@ -3,7 +3,7 @@ from __future__ import annotations
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from os import cpu_count
 
-from ..discover_tracks import TrackInfo
+from src.generate.files.tracks import TrackInfo
 
 
 def process_single_track(*, track: TrackInfo) -> None:
