@@ -1,7 +1,7 @@
 from pathlib import Path
 from datetime import date
 
-from src.generate.pages.track import render_track_body
+from src.generate.pages.track.main import render_track_body
 from src.generate.tracks.models.track_info import TrackInfo
 from src.generate.tracks.models.track_metadata import TrackMetadata
 
@@ -20,6 +20,6 @@ def test_render_track_body() -> None:
 
     result = render_track_body(track=track)
 
-    assert 'src="test-track/images/cover.jpg"' in result
+    assert 'src="images/cover.jpg"' in result
     assert 'alt="Sausage Skin - Test Track"' in result
     assert "<img" in result

@@ -1,7 +1,7 @@
 from pathlib import Path
 from datetime import date
 
-from src.generate.pages.track import render_html
+from src.generate.pages.track.main import render_html
 from src.generate.tracks.models.track_info import TrackInfo
 from src.generate.tracks.models.track_metadata import TrackMetadata
 
@@ -34,5 +34,5 @@ def test_render_track_html_writes_output(tmp_path: Path) -> None:
 
     assert "<html>" in html
     assert "<body>" in html
-    assert 'src="test-track/images/cover.jpg"' in html
+    assert 'src="images/cover.jpg"' in html
     assert 'alt="Sausage Skin - Test Track"' in html
