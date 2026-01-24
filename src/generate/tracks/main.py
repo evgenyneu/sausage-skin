@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from src.generate.tracks.models.track_info import TrackInfo
-
 from .tracks import discover_tracks as discover_tracks_impl
 from .urls import ensure_unique_urls
 
