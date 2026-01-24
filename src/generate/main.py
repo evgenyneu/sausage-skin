@@ -1,6 +1,7 @@
 from pathlib import Path
 from .index_html import generate_index_html
 
+
 def main() -> None:
     repo_root = Path.cwd()
 
