@@ -22,8 +22,8 @@ def test_process_audio_creates_mp3(tmp_path: Path) -> None:
     images_dir = repo_root / "src" / "web" / "tracks" / url / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
 
-    cover_600 = images_dir / "cover_600.jpg"
-    cover_600.write_bytes(cover_source.read_bytes())
+    cover_1200 = images_dir / "cover_1200.jpg"
+    cover_1200.write_bytes(cover_source.read_bytes())
 
     metadata = AudioMetadata(
         artist="sausage skin", title="Test Track", year=2024, album=None, track_number=None

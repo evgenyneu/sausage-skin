@@ -7,7 +7,7 @@ from src.generate.process.audio.mp3 import build_mp3_command
 def test_build_mp3_command(tmp_path: Path) -> None:
     wav = tmp_path / "track.wav"
     mp3 = tmp_path / "track.mp3"
-    cover = tmp_path / "cover_600.jpg"
+    cover = tmp_path / "cover_1200.jpg"
 
     metadata = AudioMetadata(
         artist="sausage skin", title="Test Track", year=2024, album="Test Album", track_number=1

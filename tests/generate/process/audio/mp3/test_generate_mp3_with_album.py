@@ -18,8 +18,8 @@ def test_generate_mp3_with_album_tag(tmp_path: Path) -> None:
     cover_full = tmp_path / "cover_full.jpg"
     cover_full.write_bytes(cover_source.read_bytes())
 
-    cover = tmp_path / "cover_600.jpg"
-    generate_thumbnail(cover=cover_full, thumbnail=cover)
+    cover = tmp_path / "cover_1200.jpg"
+    generate_thumbnail(cover=cover_full, thumbnail=cover, width=1200)
 
     mp3 = tmp_path / "track.mp3"
 

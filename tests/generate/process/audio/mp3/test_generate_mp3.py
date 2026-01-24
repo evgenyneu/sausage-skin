@@ -4,7 +4,7 @@ from subprocess import run
 
 from src.generate.process.audio.metadata import AudioMetadata
 from src.generate.process.audio.mp3 import generate_mp3
-from src.generate.process.cover.thumb import THUMBNAIL_WIDTH, generate_thumbnail
+from src.generate.process.cover.thumb import generate_thumbnail
 
 
 def test_generate_mp3_creates_file(tmp_path: Path) -> None:
@@ -18,8 +18,8 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
     cover_full = tmp_path / "cover_full.jpg"
     cover_full.write_bytes(cover_source.read_bytes())
 
-    cover = tmp_path / "cover_600.jpg"
-    generate_thumbnail(cover=cover_full, thumbnail=cover)
+    cover = tmp_path / "cover_1200.jpg"
+    generate_thumbnail(cover=cover_full, thumbnail=cover, width=1200)
 
     mp3 = tmp_path / "track.mp3"
 
@@ -152,4 +152,4 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
     assert image_stream.get("disposition", {}).get("attached_pic") == 1
 
     image_width = int(image_stream.get("width", 0))
-    assert image_width == THUMBNAIL_WIDTH
+    assert image_width == 1200

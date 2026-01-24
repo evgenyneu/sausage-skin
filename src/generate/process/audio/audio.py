@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from src.generate.tracks.validate import require_single_file
-from src.generate.process.cover.thumb import THUMBNAIL_WIDTH
+from src.generate.process.cover.thumb import THUMBNAIL_SIZES
 from .metadata import AudioMetadata
 from .mp3 import generate_mp3
 
@@ -24,7 +24,8 @@ def build_audio_output_path(*, repo_root: Path, url: str) -> Path:
 
 def build_cover_image_path(*, repo_root: Path, url: str) -> Path:
     images_dir = repo_root / "src" / "web" / "tracks" / url / "images"
-    return images_dir / f"cover_{THUMBNAIL_WIDTH}.jpg"
+    mp3_thumb_width = THUMBNAIL_SIZES["cover_1200"]
+    return images_dir / f"cover_{mp3_thumb_width}.jpg"
 
 
 def process_audio(*, track_dir: Path, repo_root: Path, url: str, metadata: AudioMetadata) -> None:

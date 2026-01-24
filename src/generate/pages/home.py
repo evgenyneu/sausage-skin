@@ -2,6 +2,7 @@ from pathlib import Path
 from shutil import copy2
 
 from src.generate.const import ARTIST_NAME
+from src.generate.process.cover.thumb import THUMBNAIL_SIZES
 from src.generate.tracks.models.track_info import TrackInfo
 
 
@@ -10,9 +11,11 @@ def render_track_grid(*, tracks: list[TrackInfo]) -> str:
 
     items = []
 
+    web_thumb_width = THUMBNAIL_SIZES["cover_600"]
+
     for track in sorted_tracks:
         url = track.metadata.url
-        thumbnail_path = f"{url}/images/cover_600.jpg"
+        thumbnail_path = f"{url}/images/cover_{web_thumb_width}.jpg"
         track_url = f"{url}/"
 
         alt_text = f"{ARTIST_NAME} - {track.metadata.title}"

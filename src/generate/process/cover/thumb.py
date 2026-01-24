@@ -3,6 +3,11 @@ from subprocess import CalledProcessError, run
 
 from src.generate.errors import ProgramError
 
+THUMBNAIL_SIZES = {
+    "cover_600": 600,
+    "cover_1200": 1200,
+}
+
 THUMBNAIL_WIDTH = 600
 JPEG_QUALITY = 3
 
@@ -37,3 +42,11 @@ def generate_thumbnail(
         message = f"Failed to generate thumbnail for {cover}: {stderr.strip()}"
 
         raise ProgramError(message) from error
+
+
+def generate_all_thumbs(*, cover: Path, images_dir: Path) -> None:
+    for thumb_name, width in THUMBNAIL_SIZES.items():
+        thumb_path = images_dir / f"{thumb_name}.jpg"
+
+        if not thumb_path.exists():
+            generate_thumbnail(cover=cover, thumbnail=thumb_path, width=width)
