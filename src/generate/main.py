@@ -1,6 +1,7 @@
 from pathlib import Path
 from .discover_tracks import discover_tracks
 from .index_html import generate_index_html
+from .process.main import process_tracks
 
 
 def main() -> None:
@@ -10,6 +11,8 @@ def main() -> None:
     tracks = discover_tracks(music_root=music_root)
 
     print(f"Discovered {len(tracks)} tracks")
+
+    process_tracks(tracks=tracks)
 
     generate_index_html(repo_root=repo_root)
 
