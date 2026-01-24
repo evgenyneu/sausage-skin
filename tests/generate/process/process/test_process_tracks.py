@@ -1,7 +1,7 @@
 from datetime import date as date_type
 from pathlib import Path
 
-from src.generate.process.main import process_tracks
+from src.generate.process.process import process_tracks
 from src.generate.tracks.models.track_info import TrackInfo
 from src.generate.yaml.main import TrackMetadata
 
