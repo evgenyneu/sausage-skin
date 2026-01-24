@@ -5,6 +5,7 @@ from src.generate.errors import ProgramError
 
 
 THUMBNAIL_WIDTH = 600
+JPEG_QUALITY = 3
 
 
 def build_thumbnail_command(
@@ -17,6 +18,8 @@ def build_thumbnail_command(
         str(cover),
         "-vf",
         f"scale={width}:-1",
+        "-q:v",
+        str(JPEG_QUALITY),
         str(thumbnail),
     ]
 
