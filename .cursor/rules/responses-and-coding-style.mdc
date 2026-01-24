@@ -20,6 +20,7 @@ Be very concise in your responses. After you made code changes no need to genera
 * An external dependency is ffmpeg for making mp3 and thumbnail jpg files.
 * Generate one small piece of code at a time, test it and ask for instructions on what to do next.
 * Don't name functions starting with underscores `_`. All functions are public and should be tested.
+* In Python do not import modules inside functions, import them at the top of the file.
 
 ## Testing
 
