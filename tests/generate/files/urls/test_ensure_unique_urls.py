@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from src.generate.files.tracks import TrackInfo
-from src.generate.files.urls import ensure_unique_urls
+from src.generate.tracks.tracks import TrackInfo
+from src.generate.tracks.urls import ensure_unique_urls
 from src.generate.yaml.main import TrackMetadata
 
 

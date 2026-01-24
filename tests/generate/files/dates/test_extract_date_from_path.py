@@ -1,7 +1,7 @@
 from datetime import date as date_type
 from pathlib import Path
 
-from src.generate.files.dates import extract_date_from_path
+from src.generate.tracks.dates import extract_date_from_path
 
 
 def test_extract_date_from_path() -> None:

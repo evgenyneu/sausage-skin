@@ -1,7 +1,7 @@
 from datetime import date as date_type
 from pathlib import Path
 
-from src.generate.files.main import discover_tracks
+from src.generate.tracks.main import discover_tracks
 
 
 def test_discover_tracks(tmp_path: Path) -> None:
