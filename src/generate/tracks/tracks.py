@@ -4,6 +4,7 @@ from src.generate.tracks.models.track_info import TrackInfo
 from src.generate.yaml.main import read_track_yml
 
 from .dates import extract_date_from_path
+from .validate import validate_track_sources
 
 
 def discover_tracks(*, music_root: Path) -> list[TrackInfo]:
@@ -17,6 +18,8 @@ def discover_tracks(*, music_root: Path) -> list[TrackInfo]:
 
         if not track_yml_path.exists():
             continue
+
+        validate_track_sources(track_dir=track_dir)
 
         track_date = extract_date_from_path(track_dir, music_root)
         metadata = read_track_yml(track_yml_path=track_yml_path)

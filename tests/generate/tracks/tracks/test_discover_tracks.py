@@ -10,6 +10,8 @@ def test_discover_tracks(tmp_path: Path) -> None:
 
     track_dir = music_root / "a2024" / "a11_nov" / "a05_cloven_hoofed"
     track_dir.mkdir(parents=True)
+    (track_dir / "song_mix.wav").write_text("data", encoding="utf-8")
+    (track_dir / "song_cover.jpg").write_text("data", encoding="utf-8")
     (track_dir / "track.yml").write_text(
         'title: "test"\nurl: "test"\ndescription: "test description"'
     )
