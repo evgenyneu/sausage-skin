@@ -28,7 +28,7 @@ class TrackMetadata:
     isrc: str | None = None
 
 
-def _require_non_blank(*, data: dict, key: str, track_yml_path: Path) -> None:
+def require_non_blank(*, data: dict, key: str, track_yml_path: Path) -> None:
     value = data.get(key)
 
     if not value or not str(value).strip():
@@ -36,9 +36,9 @@ def _require_non_blank(*, data: dict, key: str, track_yml_path: Path) -> None:
 
 
 def validate_track_yml(*, data: dict, track_yml_path: Path) -> None:
-    _require_non_blank(data=data, key="title", track_yml_path=track_yml_path)
-    _require_non_blank(data=data, key="description", track_yml_path=track_yml_path)
-    _require_non_blank(data=data, key="url", track_yml_path=track_yml_path)
+    require_non_blank(data=data, key="title", track_yml_path=track_yml_path)
+    require_non_blank(data=data, key="description", track_yml_path=track_yml_path)
+    require_non_blank(data=data, key="url", track_yml_path=track_yml_path)
 
 
 def read_track_yml(*, track_yml_path: Path) -> TrackMetadata:
