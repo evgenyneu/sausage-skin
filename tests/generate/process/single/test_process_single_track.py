@@ -9,6 +9,7 @@ from src.generate.yaml.main import TrackMetadata
 def test_process_single_track_no_error(tmp_path: Path) -> None:
     project_root = Path(__file__).resolve().parents[4]
     cover_source = project_root / "tests" / "test_data" / "track_cover.jpg"
+    wav_source = project_root / "tests" / "test_data" / "track_mix.wav"
 
     repo_root = tmp_path
     music_root = repo_root / "music"
@@ -18,6 +19,9 @@ def test_process_single_track_no_error(tmp_path: Path) -> None:
 
     cover = track_dir / "song_cover.jpg"
     cover.write_bytes(cover_source.read_bytes())
+
+    wav = track_dir / "song_mix.wav"
+    wav.write_bytes(wav_source.read_bytes())
 
     url = "test-track"
 
@@ -37,3 +41,7 @@ def test_process_single_track_no_error(tmp_path: Path) -> None:
     thumbnail = repo_root / "src" / "web" / "tracks" / url / "images" / "cover_600.jpg"
 
     assert thumbnail.exists()
+
+    mp3_dest = repo_root / "src" / "web" / "tracks" / url / "audio" / "track.mp3"
+
+    assert mp3_dest.exists()
