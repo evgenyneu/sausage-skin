@@ -2,7 +2,8 @@ from pathlib import Path
 from sys import exit as sys_exit
 
 from .errors import ProgramError
-from .pages.home import render_html
+from .pages.home import render_html as render_home_html
+from .pages.track import render_html_for_tracks
 from .process.main import process_tracks
 from .tracks.main import discover_tracks
 from .log.log import log
@@ -22,7 +23,8 @@ def main(
         tracks = discover_tracks(music_root=music_root)
         log(f"Processing {len(tracks)} tracks")
         process_tracks(tracks=tracks, repo_root=repo_root)
-        render_html(tracks=tracks, repo_root=repo_root)
+        render_home_html(tracks=tracks, repo_root=repo_root)
+        render_html_for_tracks(tracks=tracks, repo_root=repo_root)
         log("We are done")
         return 0
     except ProgramError as error:
