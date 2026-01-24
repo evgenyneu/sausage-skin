@@ -25,19 +25,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 
 ### 2. Process Each Track
 
-#### 2.1 URL Normalization
-
-* Read `title` from `track.yml`
-* Generate normalized URL:
-  * Lowercase
-  * Spaces → dashes
-  * Remove non-ASCII characters
-  * Example: "Pull-Ups" → "pull-ups"
-* If `url` field exists and is already normalized, skip
-* Add/update `url` field in `track.yml` (save back to source)
-* **Error**: If two tracks generate the same URL
-
-#### 2.2 Audio Processing (Cache Check)
+#### 2.1 Audio Processing (Cache Check)
 
 * Check if `src/web/tracks/{url}/audio/track.mp3` exists → skip if found
 * Locate `*_mix.wav` in track directory
@@ -45,7 +33,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Convert WAV → MP3 using `ffmpeg` via `subprocess`
 * Save to: `src/web/tracks/{url}/audio/track.mp3`
 
-#### 2.3 Image Processing (Cache Check)
+#### 2.2 Image Processing (Cache Check)
 
 * Check if `src/web/tracks/{url}/images/cover.jpg` exists → skip if found
 * Locate `*_cover.jpg` in track directory
