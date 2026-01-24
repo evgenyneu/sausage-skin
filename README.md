@@ -40,4 +40,4 @@ uv run python src/generate/main.py
 
 ## License
 
-All music and code in this repository is in [CC0 Public Domain Dedication](LICENSE).
+All music and code in this repository are dedicated to the public domain under [CC0 Public Domain Dedication](LICENSE).
