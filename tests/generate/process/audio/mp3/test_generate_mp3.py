@@ -3,6 +3,7 @@ from pathlib import Path
 from subprocess import run
 
 from src.generate.process.audio.mp3 import generate_mp3
+from src.generate.process.cover.thumb import THUMBNAIL_WIDTH, generate_thumbnail
 
 
 def test_generate_mp3_creates_file(tmp_path: Path) -> None:
@@ -13,8 +14,11 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
     wav = tmp_path / "track.wav"
     wav.write_bytes(wav_source.read_bytes())
 
+    cover_full = tmp_path / "cover_full.jpg"
+    cover_full.write_bytes(cover_source.read_bytes())
+
     cover = tmp_path / "cover_600.jpg"
-    cover.write_bytes(cover_source.read_bytes())
+    generate_thumbnail(cover=cover_full, thumbnail=cover)
 
     mp3 = tmp_path / "track.mp3"
 
@@ -126,3 +130,21 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
     assert format_tags.get("artist") == "sausage skin"
     assert format_tags.get("title") == "Test Track"
     assert format_tags.get("date") == "2024"
+
+    # Verify embedded cover image
+    # ---------------------------
+
+    assert len(metadata["streams"]) == 2
+
+    image_stream = None
+    for stream in metadata["streams"]:
+        if stream.get("codec_type") == "video":
+            image_stream = stream
+            break
+
+    assert image_stream is not None
+    assert image_stream.get("codec_name") == "mjpeg"
+    assert image_stream.get("disposition", {}).get("attached_pic") == 1
+
+    image_width = int(image_stream.get("width", 0))
+    assert image_width == THUMBNAIL_WIDTH
