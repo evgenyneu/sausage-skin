@@ -36,6 +36,10 @@ The git pre-commit hooks will cleanup, format and check it for linting errors be
 uv run pre-commit install
 ```
 
+### Install ffmpeg
+
+Install [ffmpeg](https://ffmpeg.org/), needed for making mp3s and cover image thumbnails.
+
 
 ## Generate web site
 
