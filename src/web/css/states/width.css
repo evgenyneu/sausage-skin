@@ -1,7 +1,11 @@
 .mw-1000 {
-    max-width: 1000px;
+  max-width: 1000px;
 }
 
 .mw-1600 {
     max-width: 1600px;
+}
+
+.w-full {
+    width: 100%;
 }
