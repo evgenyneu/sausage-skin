@@ -2,7 +2,7 @@ from pathlib import Path
 from sys import exit as sys_exit
 
 from .errors import ProgramError
-from .pages.home import generate_index_html
+from .pages.home import render_html
 from .process.main import process_tracks
 from .tracks.main import discover_tracks
 
@@ -21,7 +21,7 @@ def main(
         tracks = discover_tracks(music_root=music_root)
         print(f"Discovered {len(tracks)} tracks")
         process_tracks(tracks=tracks, repo_root=repo_root)
-        generate_index_html(repo_root=repo_root)
+        render_html(repo_root=repo_root)
         return 0
     except ProgramError as error:
         print(f"Error: {error}")
