@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from generate.index_html import generate_index_html
-from generate.index_html import render_index_html
+from src.generate.index_html import generate_index_html
+from src.generate.index_html import render_index_html
 
 
 def test_render_index_html_replaces_placeholder() -> None:
@@ -24,4 +24,7 @@ def test_generate_index_html_writes_output(tmp_path: Path) -> None:
 
     output_path = repo_root / "web" / "index.html"
 
-    assert output_path.read_text(encoding="utf-8") == "<html><body><div>Hello World</div></body></html>"
+    assert (
+        output_path.read_text(encoding="utf-8")
+        == "<html><body><div>Hello World</div></body></html>"
+    )
