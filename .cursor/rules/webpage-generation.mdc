@@ -1,9 +1,6 @@
 ---
-name: webpage-generation
-description: Logic for generating static web site by src/generate/main.py script
+alwaysApply: true
 ---
-
-
 # Static Website Generation Logic
 
 ## Overview
@@ -101,5 +98,9 @@ Generate static HTML/CSS/JavaScript files from music source files.
 ## Code style
 
 * The code needs to be minimal, readable, we use KISS principle.
+* Use small python and javascript files, with few function grouped by functionality in a single file. Arrange similar files in folders.Make small function that do one thing.
+* Code needs to be self-explanatory without a need of comments. Only add comments if the code is non-obvious.
+* Don't use classes/OOP, write code as functions.
 * Don't use any external Python or JavaScript libraries, we will use only what's available in Python 3.14 and the browser's JavaScript.
+* Only python dependency we use it pytest to test the code. All code needs to be tested.
 * Only dependency is ffmpeg that we will use to make mp3 and thumbnail jpg files.
