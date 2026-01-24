@@ -28,6 +28,14 @@ Install [uv](https://docs.astral.sh/uv/) and install Python dependencies:
 uv sync
 ```
 
+### Install pre-commit hooks
+
+The git pre-commit hooks will cleanup, format and check it for linting errors before committing.
+
+```sh
+uv run pre-commit install
+```
+
 
 ## Generate web site
 
