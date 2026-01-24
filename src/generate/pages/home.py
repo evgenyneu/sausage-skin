@@ -17,10 +17,10 @@ def render_track_grid(*, tracks: list[TrackInfo]) -> str:
         track_url = f"tracks/{url}/"
 
         items.append(
-            f'<a href="{track_url}"><img src="{thumbnail_path}" alt="{track.metadata.title}" /></a>'
+            f'<a href="{track_url}"><img class="TrackGrid-Image" src="{thumbnail_path}" alt="{track.metadata.title}" /></a>'
         )
 
-    return f'<div class="track-grid">{"".join(items)}</div>'
+    return f'<div class="TrackGrid">{"".join(items)}</div>'
 
 
 def copy_web_assets(*, repo_root: Path) -> None:
@@ -31,10 +31,14 @@ def copy_web_assets(*, repo_root: Path) -> None:
     web_js = repo_root / "web" / "js"
 
     if src_css.exists():
-        web_css.mkdir(parents=True, exist_ok=True)
+        from shutil import copytree
 
-        for css_file in src_css.glob("*.css"):
-            copy2(css_file, web_css / css_file.name)
+        if web_css.exists():
+            import shutil
+
+            shutil.rmtree(web_css)
+
+        copytree(src_css, web_css)
 
     if src_js.exists():
         web_js.mkdir(parents=True, exist_ok=True)
