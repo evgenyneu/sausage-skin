@@ -1,33 +1,40 @@
 from pathlib import Path
+from subprocess import run
 
 from src.generate.process.thumb.main import THUMBNAIL_WIDTH, generate_thumbnail_for_track
 
 
-def test_generate_thumbnail_for_track_uses_cover_and_width(tmp_path: Path, monkeypatch) -> None:
+def test_generate_thumbnail_for_track_creates_thumbnail_with_width_400(tmp_path: Path) -> None:
+    project_root = Path(__file__).resolve().parents[4]
+    cover_source = project_root / "tests" / "test_data" / "track_cover.jpg"
+
     track_dir = tmp_path / "track"
     track_dir.mkdir()
 
     cover = track_dir / "song_cover.jpg"
-    cover.write_text("data", encoding="utf-8")
+    cover.write_bytes(cover_source.read_bytes())
 
-    thumbnail = tmp_path / "thumb.jpg"
+    thumbnail = generate_thumbnail_for_track(track_dir=track_dir)
 
-    calls: dict[str, object] = {}
+    assert thumbnail.exists()
 
-    def fake_generate_thumbnail(
-        *, cover: Path, thumbnail: Path, width: int = THUMBNAIL_WIDTH
-    ) -> None:
-        calls["cover"] = cover
-        calls["thumbnail"] = thumbnail
-        calls["width"] = width
+    result = run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-select_streams",
+            "v:0",
+            "-show_entries",
+            "stream=width",
+            "-of",
+            "csv=p=0",
+            str(thumbnail),
+        ],
+        check=True,
+        capture_output=True,
+    )
 
-    # Patch only the generate_thumbnail helper; find_cover_image still runs real code
-    from src.generate.process.thumb import main as thumb_main
+    width_str = result.stdout.decode().strip()
 
-    monkeypatch.setattr(thumb_main, "generate_thumbnail", fake_generate_thumbnail)
-
-    generate_thumbnail_for_track(track_dir=track_dir, thumbnail=thumbnail)
-
-    assert calls["cover"] == cover
-    assert calls["thumbnail"] == thumbnail
-    assert calls["width"] == THUMBNAIL_WIDTH
+    assert width_str == str(THUMBNAIL_WIDTH)
