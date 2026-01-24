@@ -5,6 +5,7 @@ from .errors import ProgramError
 from .pages.home import render_html
 from .process.main import process_tracks
 from .tracks.main import discover_tracks
+from .log.log import log
 
 
 def main(
@@ -19,9 +20,10 @@ def main(
 
     try:
         tracks = discover_tracks(music_root=music_root)
-        print(f"Discovered {len(tracks)} tracks")
+        log(f"Processing {len(tracks)} tracks...")
         process_tracks(tracks=tracks, repo_root=repo_root)
         render_html(tracks=tracks, repo_root=repo_root)
+        log("We are done")
         return 0
     except ProgramError as error:
         print(f"Error: {error}")
