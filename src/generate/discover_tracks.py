@@ -4,12 +4,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from re import match
 
+from .track_yml import TrackMetadata, read_track_yml
+
 
 @dataclass
 class TrackInfo:
     track_dir: Path
     track_yml_path: Path
     date: str
+    metadata: TrackMetadata
 
 
 def extract_date_from_path(track_dir: Path, music_root: Path) -> str:
@@ -45,16 +48,19 @@ def discover_tracks(*, music_root: Path) -> list[TrackInfo]:
             continue
 
         track_yml_path = track_dir / "track.yml"
+
         if not track_yml_path.exists():
             continue
 
         date = extract_date_from_path(track_dir, music_root)
+        metadata = read_track_yml(track_yml_path=track_yml_path)
 
         tracks.append(
             TrackInfo(
                 track_dir=track_dir,
                 track_yml_path=track_yml_path,
                 date=date,
+                metadata=metadata,
             )
         )
 
