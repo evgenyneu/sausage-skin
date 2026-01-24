@@ -38,3 +38,25 @@ def test_generate_thumbnail_for_track_creates_thumbnail_with_width_400(tmp_path:
     width_str = result.stdout.decode().strip()
 
     assert width_str == str(THUMBNAIL_WIDTH)
+
+
+def test_generate_thumbnail_for_track_skips_when_exists(tmp_path: Path) -> None:
+    project_root = Path(__file__).resolve().parents[4]
+    cover_source = project_root / "tests" / "test_data" / "track_cover.jpg"
+
+    track_dir = tmp_path / "track"
+    track_dir.mkdir()
+
+    cover = track_dir / "song_cover.jpg"
+    cover.write_bytes(cover_source.read_bytes())
+
+    existing_thumb = track_dir / "song_cover_400.jpg"
+    existing_thumb.write_bytes(b"thumb")
+
+    thumbnail = generate_thumbnail_for_track(track_dir=track_dir)
+
+    assert thumbnail == existing_thumb
+
+    content = existing_thumb.read_bytes()
+
+    assert content == b"thumb"

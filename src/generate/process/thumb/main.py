@@ -46,6 +46,7 @@ def generate_thumbnail_for_track(*, track_dir: Path, width: int = THUMBNAIL_WIDT
     cover = find_cover_image(track_dir=track_dir)
     thumbnail = cover.with_name(f"{cover.stem}_{width}{cover.suffix}")
 
-    generate_thumbnail(cover=cover, thumbnail=thumbnail, width=width)
+    if not thumbnail.exists():
+        generate_thumbnail(cover=cover, thumbnail=thumbnail, width=width)
 
     return thumbnail
