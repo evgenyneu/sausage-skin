@@ -104,3 +104,4 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Don't use any external Python or JavaScript libraries, we will use only what's available in Python 3.14 and the browser's JavaScript.
 * Only python dependency we use it pytest to test the code. All code needs to be tested.
 * Only dependency is ffmpeg that we will use to make mp3 and thumbnail jpg files.
+* Generate one small piece of code at a time, test it and ask for instructions on what to do next.
