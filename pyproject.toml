@@ -11,6 +11,7 @@ dev = [
     "pytest",
     "ruff",
     "pre-commit", # Manage pre commit git hooks
+    "pytest-xdist", # Run tests in parallel
 ]
 
 [tool.ruff]
@@ -18,4 +19,4 @@ line-length = 100
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
-addopts = "-s"
+addopts = "-n auto -s"
