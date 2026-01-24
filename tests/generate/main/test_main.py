@@ -20,5 +20,5 @@ def test_main_runs_pipeline(tmp_path: Path) -> None:
 
     index_html = output_path.read_text(encoding="utf-8")
 
-    assert "<div>Hello World</div>" in index_html
+    assert "track-grid" in index_html
     assert exit_code == 0

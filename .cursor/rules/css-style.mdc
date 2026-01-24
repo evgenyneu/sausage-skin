@@ -1,0 +1,33 @@
+---
+alwaysApply: true
+---
+# Overview
+
+These are rules for writing CSS code.
+
+## File structure
+
+Here is example of the file structure, the individual css files here are just examples, we wont need all of them.
+
+src/web/css
+├── base - resets default styles for type, headers etc that applies to elements in all pages.
+│   ├── main.css - styles for html, body, p, etc.
+│   └── headers.css - styles for headers
+├── modules - contains css for individual modules
+│   ├── thumb.css - styles for the track thumbnail
+│   └── headers.css - styles for headers
+├── states - contains css for state class similar to Tailwind CSS: tm-3, bp-4, cl-red-500, etc.
+│   ├── colors.css - styles for colors
+│   ├── margins.css - styles for margins
+│   ├── paddings.css - styles for positions
+│   ├── width.css - styles for display
+│   └──flex.css - styles for flex
+└── app.css - main stylesheet included from html layout, it imports other css with @import directive.
+
+
+## Code style
+
+* CSS should be flat, no cascading, or nesting.
+* For common styles, like margins, colors, padding, using Tailwind style class from `states` dir: `tm-3`, `bp-4`, `cl-red-500`, etc.
+* For styling individual parts of HTML use modules locates in `modules` dir, use case like `TrackThumb`.
+* Module inner elements will start with the same module and separated with dashes: `TrackThumb-Image`, `TrackThumb-Link`.
