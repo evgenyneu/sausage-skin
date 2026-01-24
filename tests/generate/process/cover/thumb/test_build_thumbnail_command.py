@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.generate.process.thumb import THUMBNAIL_WIDTH, build_thumbnail_command
+from src.generate.process.cover.thumb import THUMBNAIL_WIDTH, build_thumbnail_command
 
 
 def test_build_thumbnail_command_default_width(tmp_path: Path) -> None:
