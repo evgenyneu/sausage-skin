@@ -1,14 +1,20 @@
 from pathlib import Path
 
-from .files.main import discover_tracks
 from .index_html import generate_index_html
 from .process.main import process_tracks
+from .tracks.main import discover_tracks
 
 
-def main() -> None:
-    repo_root = Path.cwd()
+def main(
+    repo_root: Path | None = None,
+    music_root: Path | None = None,
+) -> None:
+    if repo_root is None:
+        repo_root = Path.cwd()
 
-    music_root = repo_root / "music"
+    if music_root is None:
+        music_root = repo_root / "music"
+
     tracks = discover_tracks(music_root=music_root)
 
     print(f"Discovered {len(tracks)} tracks")

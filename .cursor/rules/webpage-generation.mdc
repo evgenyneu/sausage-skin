@@ -96,6 +96,6 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Don't name functions starting with underscore _. All functions are public and should be tested.
 * The tests should be in same subdirs as the files they are testing. For example for src/generate/yaml/validate.py the tests should be in tests/generate/yaml/validate/ dir and then each function should be tested in separate test file there: test_require_non_blank.py and  test_validate_track_yml.py
 
-## Non-code responses
+## In chat
 
-In non-code responses be very concise. No need to generate summary of what you done. Just make the code changes.
+In chat responses be very concise. No need to generate summary of what you done. Just make the code changes, don't write me in text what changes you made since I can already see the changes in git diff.
