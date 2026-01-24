@@ -42,7 +42,7 @@ uv run pre-commit install
 Generate the static web site files in the [web](web) folder from the source files in the [music](music) folder.
 
 ```sh
-uv run -m generate.main
+uv run -m src.generate.main
 ```
 
 ## Run tests
