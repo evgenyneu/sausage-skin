@@ -6,7 +6,13 @@ from src.generate.tracks.models.track_info import TrackInfo
 from src.generate.tracks.models.track_metadata import TrackMetadata
 
 
-def test_render_track_body() -> None:
+def test_render_track_body(tmp_path: Path) -> None:
+    repo_root = tmp_path
+
+    template_path = repo_root / "src" / "generate" / "pages" / "track" / "templates" / "main.html"
+    template_path.parent.mkdir(parents=True, exist_ok=True)
+    template_path.write_text('<img src="{{ cover_src }}" alt="{{ alt_text }}" />', encoding="utf-8")
+
     track = TrackInfo(
         track_dir=Path("/music/a2024/a01_jan/a01_test"),
         track_yml_path=Path("/music/a2024/a01_jan/a01_test/track.yml"),
@@ -18,7 +24,7 @@ def test_render_track_body() -> None:
         ),
     )
 
-    result = render_track_body(track=track)
+    result = render_track_body(track=track, repo_root=repo_root)
 
     assert 'src="images/cover.jpg"' in result
     assert 'alt="Sausage Skin - Test Track"' in result

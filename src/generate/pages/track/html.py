@@ -10,7 +10,7 @@ def render_html(*, track: "TrackInfo", repo_root: Path) -> None:
 
     layout_html = layout_path.read_text(encoding="utf-8")
 
-    body_html = render_track_body(track=track)
+    body_html = render_track_body(track=track, repo_root=repo_root)
 
     track_html = layout_html.replace("{{ body }}", body_html)
     track_html = track_html.replace("{{ path_prefix }}", "../")
