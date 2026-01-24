@@ -1,3 +1,4 @@
+from datetime import date as date_type
 from pathlib import Path
 
 from src.generate.discover_tracks import discover_tracks, extract_date_from_path
@@ -7,27 +8,27 @@ def test_extract_date_from_path():
     music_root = Path("/music")
     track_dir = music_root / "a2024" / "a11_nov" / "a05_cloven_hoofed"
 
-    date = extract_date_from_path(track_dir, music_root)
+    result_date = extract_date_from_path(track_dir, music_root)
 
-    assert date == "2024-11-05"
+    assert result_date == date_type(2024, 11, 5)
 
 
 def test_extract_date_from_path_single_digit_month():
     music_root = Path("/music")
     track_dir = music_root / "a2024" / "a06_jun" / "a20_deadlift"
 
-    date = extract_date_from_path(track_dir, music_root)
+    result_date = extract_date_from_path(track_dir, music_root)
 
-    assert date == "2024-06-20"
+    assert result_date == date_type(2024, 6, 20)
 
 
 def test_extract_date_from_path_single_digit_day():
     music_root = Path("/music")
     track_dir = music_root / "a2024" / "a07_jul" / "a05_overhead_press"
 
-    date = extract_date_from_path(track_dir, music_root)
+    result_date = extract_date_from_path(track_dir, music_root)
 
-    assert date == "2024-07-05"
+    assert result_date == date_type(2024, 7, 5)
 
 
 def test_discover_tracks(tmp_path):
@@ -46,5 +47,5 @@ def test_discover_tracks(tmp_path):
     assert len(tracks) == 1
     assert tracks[0].track_dir == track_dir
     assert tracks[0].track_yml_path == track_dir / "track.yml"
-    assert tracks[0].date == "2024-11-05"
+    assert tracks[0].date == date_type(2024, 11, 5)
     assert tracks[0].metadata.title == "test"
