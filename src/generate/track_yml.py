@@ -28,9 +28,21 @@ class TrackMetadata:
     url: str | None = None
 
 
+def validate_track_yml(*, data: dict, track_yml_path: Path) -> None:
+    title = data.get("title")
+    if not title or not str(title).strip():
+        raise ValueError(f"Missing required field 'title' in {track_yml_path}")
+
+    description = data.get("description")
+    if not description or not str(description).strip():
+        raise ValueError(f"Missing required field 'description' in {track_yml_path}")
+
+
 def read_track_yml(*, track_yml_path: Path) -> TrackMetadata:
     content = track_yml_path.read_text(encoding="utf-8")
     data = safe_load(content) or {}
+
+    validate_track_yml(data=data, track_yml_path=track_yml_path)
 
     album_data = data.get("album", {})
 

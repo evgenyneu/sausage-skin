@@ -59,6 +59,7 @@ def test_read_track_yml_minimal(tmp_path: Path) -> None:
     track_yml_path = tmp_path / "track.yml"
     track_yml_path.write_text(
         """title: "test"
+description: "test description"
 """,
         encoding="utf-8",
     )
@@ -66,6 +67,6 @@ def test_read_track_yml_minimal(tmp_path: Path) -> None:
     result = read_track_yml(track_yml_path=track_yml_path)
 
     assert result.title == "test"
+    assert result.description == "test description"
     assert result.album is None
     assert result.links is None
-    assert result.description is None

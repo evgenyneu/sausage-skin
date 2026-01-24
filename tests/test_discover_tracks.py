@@ -36,7 +36,7 @@ def test_discover_tracks(tmp_path):
 
     track_dir = music_root / "a2024" / "a11_nov" / "a05_cloven_hoofed"
     track_dir.mkdir(parents=True)
-    (track_dir / "track.yml").write_text('title: "test"')
+    (track_dir / "track.yml").write_text('title: "test"\ndescription: "test description"')
 
     no_track_dir = music_root / "a2024" / "a11_nov" / "a06_no_track"
     no_track_dir.mkdir(parents=True)
