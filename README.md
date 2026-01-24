@@ -38,6 +38,6 @@ uv run python src/generate/main.py
 ```
 
 
-## License
+## No rights reserved
 
 All music and code in this repository are dedicated to the public domain under [CC0 Public Domain Dedication](LICENSE).
