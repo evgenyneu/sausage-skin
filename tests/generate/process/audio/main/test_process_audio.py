@@ -16,7 +16,9 @@ def test_process_audio_calls_implementation(tmp_path: Path) -> None:
 
     url = "test-track"
 
-    process_audio(track_dir=track_dir, repo_root=repo_root, url=url)
+    process_audio(
+        track_dir=track_dir, repo_root=repo_root, url=url, artist="sausage skin", title="Test Track"
+    )
 
     mp3_dest = repo_root / "src" / "web" / "tracks" / url / "audio" / "track.mp3"
 

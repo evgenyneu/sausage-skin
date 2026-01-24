@@ -14,7 +14,7 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
 
     mp3 = tmp_path / "track.mp3"
 
-    generate_mp3(wav=wav, mp3=mp3)
+    generate_mp3(wav=wav, mp3=mp3, artist="sausage skin", title="Test Track")
 
     assert mp3.exists()
 
@@ -113,3 +113,9 @@ def test_generate_mp3_creates_file(tmp_path: Path) -> None:
 
     assert isrc == "AUQ1W2400999"
     assert tsrc == "AUQ1W2400999"
+
+    # Verify artist and title tags
+    # ---------------------------
+
+    assert format_tags.get("artist") == "sausage skin"
+    assert format_tags.get("title") == "Test Track"

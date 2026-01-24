@@ -17,7 +17,9 @@ def test_process_audio_creates_mp3(tmp_path: Path) -> None:
 
     url = "test-track"
 
-    process_audio_impl(track_dir=track_dir, repo_root=repo_root, url=url)
+    process_audio_impl(
+        track_dir=track_dir, repo_root=repo_root, url=url, artist="sausage skin", title="Test Track"
+    )
 
     mp3_dest = repo_root / "src" / "web" / "tracks" / url / "audio" / "track.mp3"
 
@@ -64,6 +66,8 @@ def test_process_audio_skips_when_asset_exists(tmp_path: Path) -> None:
     mp3_dest = audio_dir / "track.mp3"
     mp3_dest.write_bytes(b"existing-mp3-data")
 
-    process_audio_impl(track_dir=track_dir, repo_root=repo_root, url=url)
+    process_audio_impl(
+        track_dir=track_dir, repo_root=repo_root, url=url, artist="sausage skin", title="Test Track"
+    )
 
     assert mp3_dest.read_bytes() == b"existing-mp3-data"

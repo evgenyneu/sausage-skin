@@ -2,11 +2,10 @@ from pathlib import Path
 from shutil import copy2
 from typing import TYPE_CHECKING
 
+from src.generate.const import ARTIST_NAME
+
 if TYPE_CHECKING:
     from src.generate.tracks.models.track_info import TrackInfo
-
-
-ARTIST_NAME = "sausage skin"
 
 
 def render_track_grid(*, tracks: list[TrackInfo]) -> str:
