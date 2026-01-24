@@ -1,10 +1,7 @@
 from pathlib import Path
-from typing import TYPE_CHECKING
 
 from .body import render_track_body
-
-if TYPE_CHECKING:
-    from src.generate.tracks.models.track_info import TrackInfo
+from src.generate.tracks.models.track_info import TrackInfo
 
 
 def render_html(*, track: "TrackInfo", repo_root: Path) -> None:
