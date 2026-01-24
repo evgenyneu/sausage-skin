@@ -19,4 +19,5 @@ def process_single_track(*, track: TrackInfo, repo_root: Path) -> None:
         url=track.metadata.url,
         artist=ARTIST_NAME,
         title=track.metadata.title,
+        year=track.date.year,
     )

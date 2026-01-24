@@ -21,11 +21,13 @@ def build_audio_output_path(*, repo_root: Path, url: str) -> Path:
     return mp3_path
 
 
-def process_audio(*, track_dir: Path, repo_root: Path, url: str, artist: str, title: str) -> None:
+def process_audio(
+    *, track_dir: Path, repo_root: Path, url: str, artist: str, title: str, year: int
+) -> None:
     source_wav = find_mix_wav(track_dir=track_dir)
 
     mp3_path = build_audio_output_path(repo_root=repo_root, url=url)
     mp3_path.parent.mkdir(parents=True, exist_ok=True)
 
     if not mp3_path.exists():
-        generate_mp3(wav=source_wav, mp3=mp3_path, artist=artist, title=title)
+        generate_mp3(wav=source_wav, mp3=mp3_path, artist=artist, title=title, year=year)

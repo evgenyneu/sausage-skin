@@ -4,7 +4,7 @@ from subprocess import CalledProcessError, run
 from src.generate.errors import ProgramError
 
 
-def build_mp3_command(*, wav: Path, mp3: Path, artist: str, title: str) -> list[str]:
+def build_mp3_command(*, wav: Path, mp3: Path, artist: str, title: str, year: int) -> list[str]:
     return [
         "ffmpeg",
         "-y",
@@ -18,12 +18,14 @@ def build_mp3_command(*, wav: Path, mp3: Path, artist: str, title: str) -> list[
         f"artist={artist}",
         "-metadata",
         f"title={title}",
+        "-metadata",
+        f"date={year}",
         str(mp3),
     ]
 
 
-def generate_mp3(*, wav: Path, mp3: Path, artist: str, title: str) -> None:
-    command = build_mp3_command(wav=wav, mp3=mp3, artist=artist, title=title)
+def generate_mp3(*, wav: Path, mp3: Path, artist: str, title: str, year: int) -> None:
+    command = build_mp3_command(wav=wav, mp3=mp3, artist=artist, title=title, year=year)
 
     try:
         run(command, check=True, capture_output=True)

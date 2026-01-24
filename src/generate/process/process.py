@@ -8,7 +8,7 @@ from .single import process_single_track
 
 
 def process_tracks(*, tracks: list[TrackInfo], repo_root: Path) -> None:
-    max_workers = min(4, cpu_count() or 1)
+    max_workers = min(8, cpu_count() or 1)
 
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
         futures = {
