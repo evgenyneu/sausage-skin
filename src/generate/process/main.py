@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from os import cpu_count
 

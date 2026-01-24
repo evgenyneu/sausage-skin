@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from pathlib import Path
 
 
@@ -13,9 +11,7 @@ def generate_index_html(*, repo_root: Path) -> None:
 
     layout_html = layout_path.read_text(encoding="utf-8")
 
-    index_html = render_index_html(
-        layout_html=layout_html, body_html="<div>Hello World</div>"
-    )
+    index_html = render_index_html(layout_html=layout_html, body_html="<div>Hello World</div>")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(index_html, encoding="utf-8")
