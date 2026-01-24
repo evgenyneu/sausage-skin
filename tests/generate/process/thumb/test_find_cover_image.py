@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.generate.process.thumb.main import find_cover_image
+from src.generate.process.thumb import find_cover_image
 
 
 def test_find_cover_image_ok(tmp_path: Path) -> None:

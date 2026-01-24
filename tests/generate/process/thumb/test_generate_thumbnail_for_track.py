@@ -1,7 +1,7 @@
 from pathlib import Path
 from subprocess import run
 
-from src.generate.process.thumb.main import THUMBNAIL_WIDTH, generate_thumbnail_for_track
+from src.generate.process.thumb import THUMBNAIL_WIDTH, generate_thumbnail_for_track
 
 
 def test_generate_thumbnail_for_track_creates_thumbnail_with_width_600(tmp_path: Path) -> None:

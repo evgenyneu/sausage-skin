@@ -1,4 +1,4 @@
-from src.generate.process.thumb.main import generate_thumbnail_for_track
+from src.generate.process.thumb import generate_thumbnail_for_track
 from src.generate.tracks.models.track_info import TrackInfo
 
 
