@@ -8,13 +8,13 @@ description: Logic for generating static web site by src/generate/main.py script
 
 ## Overview
 
-Generate static HTML/CSS/JavaScript files from music source files. Use only Python 3.14 built-in libraries. Requires ffmpeg for audio conversion.
+Generate static HTML/CSS/JavaScript files from music source files.
 
 ## Directory Structure
 
 * **Source templates**: `src/web/` - HTML templates and source files
 * **Cache**: `src/web/tracks/` - Generated audio/images (cache, skip if exists)
-* **Output**: `web/` - Final static files (copied from `src/web/tracks/` + generated HTML/CSS/JS)
+* **Output**: `web/` - Final static files (copied from `src/web/tracks/` + generated HTML/CSS/JS). The content of this folder is disposable and will be regenerated on each run
 
 ## Process Flow
 
@@ -97,3 +97,9 @@ Generate static HTML/CSS/JavaScript files from music source files. Use only Pyth
 * `web/tracks/{url}/images/cover_400.jpg` - Thumbnail per track
 * `web/css/*.css` - Stylesheets
 * `web/js/*.js` - JavaScript
+
+## Code style
+
+* The code needs to be minimal, readable, we use KISS principle.
+* Don't use any external Python or JavaScript libraries, we will use only what's available in Python 3.14 and the browser's JavaScript.
+* Only dependency is ffmpeg that we will use to make mp3 and thumbnail jpg files.
