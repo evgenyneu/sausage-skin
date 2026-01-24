@@ -13,6 +13,7 @@ def render_html(*, track: "TrackInfo", repo_root: Path) -> None:
     body_html = render_track_body(track=track)
 
     track_html = layout_html.replace("{{ body }}", body_html)
+    track_html = track_html.replace("{{ path_prefix }}", "../")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(track_html, encoding="utf-8")

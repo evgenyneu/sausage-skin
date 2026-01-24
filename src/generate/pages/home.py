@@ -60,6 +60,7 @@ def render_html(*, tracks: list[TrackInfo], repo_root: Path) -> None:
     body_html = render_track_grid(tracks=tracks)
 
     index_html = layout_html.replace("{{ body }}", body_html)
+    index_html = index_html.replace("{{ path_prefix }}", "")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(index_html, encoding="utf-8")
