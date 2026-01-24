@@ -1,34 +1,13 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 from pathlib import Path
 
 from yaml import safe_load
 
 from .validate import validate_track_yml
-
-
-@dataclass
-class Album:
-    track_number: int | None = None
-    name: str | None = None
-
-
-@dataclass
-class Links:
-    youtube: str | None = None
-    soundcloud: str | None = None
-    bandcamp: str | None = None
-
-
-@dataclass
-class TrackMetadata:
-    title: str
-    url: str
-    album: Album | None = None
-    links: Links | None = None
-    description: str | None = None
-    isrc: str | None = None
+from src.generate.tracks.models.album import Album
+from src.generate.tracks.models.links import Links
+from src.generate.tracks.models.track_metadata import TrackMetadata
 
 
 def read_track_yml(*, track_yml_path: Path) -> TrackMetadata:

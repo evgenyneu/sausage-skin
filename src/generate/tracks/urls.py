@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .tracks import TrackInfo
+from src.generate.tracks.models.track_info import TrackInfo
 
 
 def ensure_unique_urls(*, tracks: list[TrackInfo]) -> None:

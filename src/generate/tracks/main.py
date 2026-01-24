@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .tracks import TrackInfo, discover_tracks as discover_tracks_impl
+from src.generate.tracks.models.track_info import TrackInfo
+
+from .tracks import discover_tracks as discover_tracks_impl
 from .urls import ensure_unique_urls
 
 

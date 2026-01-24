@@ -1,20 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
-from datetime import date
 from pathlib import Path
 
-from src.generate.yaml.main import TrackMetadata, read_track_yml
+from src.generate.tracks.models.track_info import TrackInfo
+from src.generate.yaml.main import read_track_yml
 
 from .dates import extract_date_from_path
-
-
-@dataclass
-class TrackInfo:
-    track_dir: Path
-    track_yml_path: Path
-    date: date
-    metadata: TrackMetadata
 
 
 def discover_tracks(*, music_root: Path) -> list[TrackInfo]:
