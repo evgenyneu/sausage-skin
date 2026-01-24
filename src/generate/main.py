@@ -1,11 +1,10 @@
 from pathlib import Path
 from sys import exit as sys_exit
 
+from .errors import ProgramError
 from .index_html import generate_index_html
 from .process.main import process_tracks
-from .tracks.errors import TrackValidationError
 from .tracks.main import discover_tracks
-from .yaml.errors import YamlValidationError
 
 
 def main(
@@ -24,7 +23,7 @@ def main(
         process_tracks(tracks=tracks)
         generate_index_html(repo_root=repo_root)
         return 0
-    except (TrackValidationError, YamlValidationError) as error:
+    except ProgramError as error:
         print(f"Error: {error}")
         return 1
 
