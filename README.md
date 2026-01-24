@@ -20,11 +20,17 @@ Each day folder contains following files:
 * `README.md` - notes about the track.
 * Ablton Live project files are stored in a subfolder, which were used to make the mastered `*_mix.wav` file.
 
-
 ## Setup
 
 Install [uv](https://docs.astral.sh/uv/) and install Python dependencies:
 
 ```sh
 uv sync
+```
+
+
+## Generate web site
+
+```sh
+uv run python src/generate/main.py
 ```
