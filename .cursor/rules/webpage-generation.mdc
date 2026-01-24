@@ -63,21 +63,3 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * `web/{url}/audio/track.mp3` - Track audio
 * `web/{url}/images/cover.jpg` - Track cover
 * `web/{url}/images/cover_600.jpg` - Track cover thumbnail
-
-
-## Code style
-
-* The code needs to be minimal, readable, we use KISS principle.
-* Use small Python and JavaScript files, with few function grouped by functionality in a single file. Arrange similar files in folders. Make small function that do one thing.
-* Code needs to be self-explanatory without a need of comments. Only add comments if the code is non-obvious.
-* Don't use classes/OOP, write code as functions.
-* Try not to use external Python or JavaScript libraries, we will use only what's available in Python 3.14 and the browser's JavaScript. Only add a library if absolutely necessary.
-* All code needs to be tested.
-* An external dependency is ffmpeg for making mp3 and thumbnail jpg files.
-* Generate one small piece of code at a time, test it and ask for instructions on what to do next.
-* Don't name functions starting with underscores `_`. All functions are public and should be tested.
-* The tests should be in same subdirs as the files they are testing. For example for src/generate/yaml/validate.py the tests should be in tests/generate/yaml/validate/ dir and then each function should be tested in separate test file there: test_require_non_blank.py and  test_validate_track_yml.py
-
-## Concise responses
-
-Be very concise in your responses. After you made code changes no need to generate summary of what you've done. Just write 'We are done :D'.
