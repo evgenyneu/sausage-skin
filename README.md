@@ -31,6 +31,13 @@ uv sync
 
 ## Generate web site
 
+Generate the static web site files in the [web](web) folder from the source files in the [music](music) folder.
+
 ```sh
 uv run python src/generate/main.py
 ```
+
+
+## License
+
+All music and code in this repository is in [CC0 Public Domain Dedication](LICENSE).
