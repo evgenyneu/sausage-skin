@@ -1,0 +1,99 @@
+---
+name: webpage-generation
+description: Logic for generating static web site by src/generate/main.py script
+---
+
+
+# Static Website Generation Logic
+
+## Overview
+
+Generate static HTML/CSS/JavaScript files from music source files. Use only Python 3.14 built-in libraries. Requires ffmpeg for audio conversion.
+
+## Directory Structure
+
+* **Source templates**: `src/web/` - HTML templates and source files
+* **Cache**: `src/web/tracks/` - Generated audio/images (cache, skip if exists)
+* **Output**: `web/` - Final static files (copied from `src/web/tracks/` + generated HTML/CSS/JS)
+
+## Process Flow
+
+### 1. Discover Tracks
+
+* Scan `music/` directory recursively
+* Find all day folders containing `track.yml`
+* Ignore day folders without `track.yml`
+* Extract date from folder path: `music/a{year}/a{month}_{name}/a{day}_{name}/`
+  * Example: `music/a2024/a11_nov/a05_cloven_hoofed/` → date: 2024-11-05
+
+### 2. Process Each Track
+
+#### 2.1 URL Normalization
+
+* Read `title` from `track.yml`
+* Generate normalized URL:
+  * Lowercase
+  * Spaces → dashes
+  * Remove non-ASCII characters
+  * Example: "Pull-Ups" → "pull-ups"
+* If `url` field exists and is already normalized, skip
+* Add/update `url` field in `track.yml` (save back to source)
+* **Error**: If two tracks generate the same URL
+
+#### 2.2 Audio Processing (Cache Check)
+
+* Check if `src/web/tracks/{url}/audio/track.mp3` exists → skip if found
+* Locate `*_mix.wav` in track directory
+* **Error**: If missing or multiple matches
+* Convert WAV → MP3 using `ffmpeg` via `subprocess`
+* Save to: `src/web/tracks/{url}/audio/track.mp3`
+
+#### 2.3 Image Processing (Cache Check)
+
+* Check if `src/web/tracks/{url}/images/cover.jpg` exists → skip if found
+* Locate `*_cover.jpg` in track directory
+* **Error**: If missing or multiple matches
+* Copy to: `src/web/tracks/{url}/images/cover.jpg`
+* Generate thumbnail (400px width, constant in Python script)
+* Save to: `src/web/tracks/{url}/images/cover_400.jpg`
+
+### 3. Copy Cache to Output
+
+* Copy entire `src/web/tracks/` directory to `web/tracks/`
+
+### 4. Generate Index Page
+
+#### 4.1 Collect Track Data
+
+* Load all processed tracks
+* Sort chronologically by date (newest first) extracted from folder path
+* Extract: title, url, cover thumbnail path, audio path
+
+#### 4.2 HTML Generation
+
+* Load template: `src/web/layout/index.html`
+* Template contains: `<html>`, `<head>`, but `<body>` is placeholder
+* Generate `<body>` with:
+  * Track grid (responsive, no margins)
+  * Player controls bar (fixed bottom)
+
+#### 4.3 Track Grid
+
+* Display cover thumbnails (`cover_400.jpg`)
+* Responsive CSS grid: many on wide screens, few on narrow (2-3 on phone)
+* Click thumbnail → play track in player
+
+#### 4.4 Player Controls
+
+* Fixed bottom bar (always visible)
+* Controls: play/pause, forward (next track), backward (previous track)
+* JavaScript handles playback and track navigation
+
+### 5. Output Files
+
+* `web/index.html` - Main page
+* `web/tracks/{url}/audio/track.mp3` - Audio per track
+* `web/tracks/{url}/images/cover.jpg` - Cover per track
+* `web/tracks/{url}/images/cover_400.jpg` - Thumbnail per track
+* `web/css/*.css` - Stylesheets
+* `web/js/*.js` - JavaScript
