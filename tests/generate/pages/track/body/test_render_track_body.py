@@ -1,7 +1,7 @@
 from pathlib import Path
 from datetime import date
 
-from src.generate.pages.track.main import render_track_body
+from src.generate.pages.track.body import render_track_body
 from src.generate.tracks.models.track_info import TrackInfo
 from src.generate.tracks.models.track_metadata import TrackMetadata
 
