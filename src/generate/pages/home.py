@@ -11,7 +11,7 @@ def render_track_grid(*, tracks: list[TrackInfo]) -> str:
 
     items = []
 
-    web_thumb_width = THUMBNAIL_SIZES["cover_600"]
+    web_thumb_width = THUMBNAIL_SIZES["small"]
 
     for track in sorted_tracks:
         url = track.metadata.url

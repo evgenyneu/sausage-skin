@@ -24,7 +24,7 @@ def build_audio_output_path(*, repo_root: Path, url: str) -> Path:
 
 def build_cover_image_path(*, repo_root: Path, url: str) -> Path:
     images_dir = repo_root / "src" / "web" / "tracks" / url / "images"
-    mp3_thumb_width = THUMBNAIL_SIZES["cover_1200"]
+    mp3_thumb_width = THUMBNAIL_SIZES["medium"]
     return images_dir / f"cover_{mp3_thumb_width}.jpg"
 
 
