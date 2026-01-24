@@ -3,7 +3,6 @@ from subprocess import CalledProcessError, run
 
 from src.generate.errors import ProgramError
 
-
 THUMBNAIL_WIDTH = 600
 JPEG_QUALITY = 3
 
