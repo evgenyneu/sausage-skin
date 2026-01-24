@@ -6,6 +6,9 @@ if TYPE_CHECKING:
     from src.generate.tracks.models.track_info import TrackInfo
 
 
+ARTIST_NAME = "sausage skin"
+
+
 def render_track_grid(*, tracks: list[TrackInfo]) -> str:
     sorted_tracks = sorted(tracks, key=lambda t: t.date, reverse=True)
 
@@ -16,8 +19,10 @@ def render_track_grid(*, tracks: list[TrackInfo]) -> str:
         thumbnail_path = f"{url}/images/cover_600.jpg"
         track_url = f"{url}/"
 
+        alt_text = f"{ARTIST_NAME} - {track.metadata.title}"
+
         items.append(
-            f'<a href="{track_url}"><img class="TrackGrid-Image" src="{thumbnail_path}" alt="{track.metadata.title}" /></a>'
+            f'<a href="{track_url}"><img class="TrackGrid-Image" src="{thumbnail_path}" alt="{alt_text}" /></a>'
         )
 
     return f'<div class="TrackGrid">{"".join(items)}</div>'
