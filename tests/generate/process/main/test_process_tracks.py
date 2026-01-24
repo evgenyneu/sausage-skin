@@ -34,6 +34,6 @@ def test_process_tracks_single_track(tmp_path: Path) -> None:
 
     process_tracks(tracks=[track])
 
-    thumbnail = cover.with_name("song_cover_400.jpg")
+    thumbnail = cover.with_name("song_cover_600.jpg")
 
     assert thumbnail.exists()

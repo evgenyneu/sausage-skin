@@ -5,7 +5,7 @@ from src.generate.errors import ProgramError
 from src.generate.tracks.validate import require_single_file
 
 
-THUMBNAIL_WIDTH = 400
+THUMBNAIL_WIDTH = 600
 
 
 def build_thumbnail_command(

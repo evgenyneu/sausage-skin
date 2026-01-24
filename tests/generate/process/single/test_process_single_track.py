@@ -30,6 +30,6 @@ def test_process_single_track_no_error(tmp_path: Path) -> None:
 
     process_single_track(track=track)
 
-    thumbnail = cover.with_name("song_cover_400.jpg")
+    thumbnail = cover.with_name("song_cover_600.jpg")
 
     assert thumbnail.exists()

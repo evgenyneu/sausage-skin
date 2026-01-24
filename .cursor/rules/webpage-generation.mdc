@@ -39,8 +39,8 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Locate `*_cover.jpg` in track directory
 * **Error**: If missing or multiple matches
 * Copy to: `src/web/tracks/{url}/images/cover.jpg`
-* Generate thumbnail (400px width, constant in Python script)
-* Save to: `src/web/tracks/{url}/images/cover_400.jpg`
+* Generate thumbnail (600px width, constant in Python script)
+* Save to: `src/web/tracks/{url}/images/cover_600.jpg`
 
 ### 3. Copy Cache to Output
 
@@ -64,7 +64,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 
 #### 4.3 Track Grid
 
-* Display cover thumbnails (`cover_400.jpg`)
+* Display cover thumbnails (`cover_600.jpg`)
 * Responsive CSS grid: many on wide screens, few on narrow (2-3 on phone)
 * Click thumbnail → play track in player
 
@@ -79,7 +79,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * `web/index.html` - Main page
 * `web/tracks/{url}/audio/track.mp3` - Audio per track
 * `web/tracks/{url}/images/cover.jpg` - Cover per track
-* `web/tracks/{url}/images/cover_400.jpg` - Thumbnail per track
+* `web/tracks/{url}/images/cover_600.jpg` - Thumbnail per track
 * `web/css/*.css` - Stylesheets
 * `web/js/*.js` - JavaScript
 

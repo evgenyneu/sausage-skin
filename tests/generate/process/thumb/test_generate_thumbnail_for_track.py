@@ -4,7 +4,7 @@ from subprocess import run
 from src.generate.process.thumb.main import THUMBNAIL_WIDTH, generate_thumbnail_for_track
 
 
-def test_generate_thumbnail_for_track_creates_thumbnail_with_width_400(tmp_path: Path) -> None:
+def test_generate_thumbnail_for_track_creates_thumbnail_with_width_600(tmp_path: Path) -> None:
     project_root = Path(__file__).resolve().parents[4]
     cover_source = project_root / "tests" / "test_data" / "track_cover.jpg"
 
@@ -50,7 +50,7 @@ def test_generate_thumbnail_for_track_skips_when_exists(tmp_path: Path) -> None:
     cover = track_dir / "song_cover.jpg"
     cover.write_bytes(cover_source.read_bytes())
 
-    existing_thumb = track_dir / "song_cover_400.jpg"
+    existing_thumb = track_dir / "song_cover_600.jpg"
     existing_thumb.write_bytes(b"thumb")
 
     thumbnail = generate_thumbnail_for_track(track_dir=track_dir)
