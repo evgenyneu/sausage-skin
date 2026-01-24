@@ -8,13 +8,19 @@ from src.generate.process.audio.mp3 import generate_mp3
 def test_generate_mp3_creates_file(tmp_path: Path) -> None:
     project_root = Path(__file__).resolve().parents[5]
     wav_source = project_root / "tests" / "test_data" / "track_mix.wav"
+    cover_source = project_root / "tests" / "test_data" / "track_cover.jpg"
 
     wav = tmp_path / "track.wav"
     wav.write_bytes(wav_source.read_bytes())
 
+    cover = tmp_path / "cover_600.jpg"
+    cover.write_bytes(cover_source.read_bytes())
+
     mp3 = tmp_path / "track.mp3"
 
-    generate_mp3(wav=wav, mp3=mp3, artist="sausage skin", title="Test Track", year=2024)
+    generate_mp3(
+        wav=wav, mp3=mp3, artist="sausage skin", title="Test Track", year=2024, cover=cover
+    )
 
     assert mp3.exists()
 
