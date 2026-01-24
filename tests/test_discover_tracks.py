@@ -9,7 +9,7 @@ from src.generate.discover_tracks import (
     ensure_unique_urls,
     extract_date_from_path,
 )
-from src.generate.track_yml import TrackMetadata
+from src.generate.yaml.main import TrackMetadata
 
 
 def test_extract_date_from_path():

@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.generate.track_yml import read_track_yml
+from src.generate.yaml.main import read_track_yml
 
 
 def test_read_track_yml(tmp_path: Path) -> None:

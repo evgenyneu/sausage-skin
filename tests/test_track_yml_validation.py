@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from src.generate.track_yml import read_track_yml
+from src.generate.yaml.main import read_track_yml
 
 
 def test_validate_track_yml_missing_title(tmp_path: Path) -> None:

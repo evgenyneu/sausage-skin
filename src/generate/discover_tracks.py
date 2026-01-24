@@ -5,7 +5,7 @@ from datetime import date
 from pathlib import Path
 from re import match
 
-from .track_yml import TrackMetadata, read_track_yml
+from .yaml.main import TrackMetadata, read_track_yml
 
 
 @dataclass

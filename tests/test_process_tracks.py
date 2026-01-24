@@ -3,7 +3,7 @@ from pathlib import Path
 
 from src.generate.discover_tracks import TrackInfo
 from src.generate.process.main import process_tracks
-from src.generate.track_yml import TrackMetadata
+from src.generate.yaml.main import TrackMetadata
 
 
 def test_process_tracks_empty_list() -> None:
