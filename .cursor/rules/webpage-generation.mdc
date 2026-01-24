@@ -93,3 +93,8 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Only python dependency we use it pytest to test the code. All code needs to be tested.
 * Only dependency is ffmpeg that we will use to make mp3 and thumbnail jpg files.
 * Generate one small piece of code at a time, test it and ask for instructions on what to do next.
+* Don't name functions starting with underscore _. All functions are public and should be tested.
+
+## Non-code responses
+
+In non-code responses be very concise. No need to generate summary of what you done. Just make the code changes.

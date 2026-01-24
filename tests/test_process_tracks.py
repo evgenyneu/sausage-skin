@@ -21,6 +21,7 @@ def test_process_tracks_single_track(tmp_path: Path) -> None:
         date=date_type(2024, 1, 1),
         metadata=TrackMetadata(
             title="test",
+            url="test",
             description="test description",
         ),
     )
