@@ -94,6 +94,7 @@ Generate static HTML/CSS/JavaScript files from music source files.
 * Only dependency is ffmpeg that we will use to make mp3 and thumbnail jpg files.
 * Generate one small piece of code at a time, test it and ask for instructions on what to do next.
 * Don't name functions starting with underscore _. All functions are public and should be tested.
+* The tests should be in same subdirs as the files they are testing. For example for src/generate/yaml/validate.py the tests should be in tests/generate/yaml/validate/ dir and then each function should be tested in separate test file there: test_require_non_blank.py and  test_validate_track_yml.py
 
 ## Non-code responses
 

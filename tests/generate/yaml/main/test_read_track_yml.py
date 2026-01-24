@@ -55,6 +55,7 @@ description: Some description without quotes
     result = read_track_yml(track_yml_path=track_yml_path)
 
     assert result.title == "deadlift"
+    assert result.url == "deadlift"
     assert result.description == "Some description without quotes"
 
 
