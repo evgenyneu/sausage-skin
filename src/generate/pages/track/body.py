@@ -14,7 +14,7 @@ def render_track_body(*, track: "TrackInfo", repo_root: Path) -> str:
     cover_path = "images/cover.jpg"
     alt_text = f"{ARTIST_NAME} - {track.metadata.title}"
     description_text = track.metadata.description or ""
-    download_link_html = render_download_link(repo_root=repo_root)
+    download_link_html = render_download_link(repo_root=repo_root, track_title=track.metadata.title)
     links_html = render_links(track=track, repo_root=repo_root)
 
     template_html = replace_attribute_tag(

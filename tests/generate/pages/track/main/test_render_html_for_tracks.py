@@ -24,7 +24,8 @@ def test_render_html_for_tracks_generates_all_track_pages(tmp_path: Path) -> Non
     template_path.write_text('<img src="{{ cover_src }}" alt="{{ alt_text }}" />', encoding="utf-8")
 
     download_template_path.write_text(
-        '<div><a href="audio/track.mp3" download>Download</a></div>', encoding="utf-8"
+        '<div><a href="audio/track.mp3" download="{{ filename }}">Download</a></div>',
+        encoding="utf-8",
     )
 
     track1 = TrackInfo(

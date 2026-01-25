@@ -20,7 +20,8 @@ def test_render_track_body(tmp_path: Path) -> None:
     template_path.write_text('<img src="{{ cover_src }}" alt="{{ alt_text }}" />', encoding="utf-8")
 
     download_template_path.write_text(
-        '<div><a href="audio/track.mp3" download>Download</a></div>', encoding="utf-8"
+        '<div><a href="audio/track.mp3" download="{{ filename }}">Download</a></div>',
+        encoding="utf-8",
     )
 
     track = TrackInfo(
@@ -60,7 +61,8 @@ def test_render_track_body_no_links_renders_nothing(tmp_path: Path) -> None:
     links_template_path.parent.mkdir(parents=True, exist_ok=True)
     template_path.write_text("<div><p>{{ description }}</p>{{ links }}</div>", encoding="utf-8")
     download_template_path.write_text(
-        '<div><a href="audio/track.mp3" download>Download</a></div>', encoding="utf-8"
+        '<div><a href="audio/track.mp3" download="{{ filename }}">Download</a></div>',
+        encoding="utf-8",
     )
     link_template_path.write_text('<a href="{{ url }}">{{ label }}</a>', encoding="utf-8")
     links_template_path.write_text("<div>{{ links }}</div>", encoding="utf-8")
