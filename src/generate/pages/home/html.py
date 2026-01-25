@@ -11,7 +11,7 @@ def render_html(*, tracks: list[TrackInfo], repo_root: Path) -> None:
 
     layout_html = layout_path.read_text(encoding="utf-8")
 
-    body_html = render_track_grid(tracks=tracks)
+    body_html = render_track_grid(tracks=tracks, repo_root=repo_root)
 
     index_html = layout_html.replace("{{ body }}", body_html)
     index_html = index_html.replace("{{ path_prefix }}", "")

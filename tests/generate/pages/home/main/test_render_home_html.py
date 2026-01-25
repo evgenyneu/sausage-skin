@@ -17,6 +17,23 @@ def test_render_html_calls_implementation(tmp_path: Path) -> None:
     css_app.parent.mkdir(parents=True, exist_ok=True)
     css_app.write_text("body { margin: 0; }", encoding="utf-8")
 
+    template_main_path = (
+        repo_root / "src" / "generate" / "pages" / "home" / "templates" / "main.html"
+    )
+
+    template_track_path = (
+        repo_root / "src" / "generate" / "pages" / "home" / "templates" / "track.html"
+    )
+
+    template_main_path.parent.mkdir(parents=True, exist_ok=True)
+    template_track_path.parent.mkdir(parents=True, exist_ok=True)
+
+    template_main_path.write_text('<div class="TrackGrid">{{ tracks }}</div>', encoding="utf-8")
+    template_track_path.write_text(
+        '<a href="{{ track_url }}"><img class="TrackGrid-Image" src="{{ thumbnail_path }}" alt="{{ alt_text }}" /></a>',
+        encoding="utf-8",
+    )
+
     track = TrackInfo(
         track_dir=Path("/music/a2024/a01_jan/a01_test"),
         track_yml_path=Path("/music/a2024/a01_jan/a01_test/track.yml"),
