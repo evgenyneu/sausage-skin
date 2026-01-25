@@ -11,7 +11,13 @@ def render_track_body(*, track: "TrackInfo", repo_root: Path) -> str:
     cover_path = "images/cover.jpg"
     alt_text = f"{ARTIST_NAME} - {track.metadata.title}"
 
+    description_html = ""
+
+    if track.metadata.description:
+        description_html = f'<p class="mt-2">{track.metadata.description}</p>'
+
     body_html = template_html.replace("{{ cover_src }}", cover_path)
     body_html = body_html.replace("{{ alt_text }}", alt_text)
+    body_html = body_html.replace("{{ description }}", description_html)
 
     return body_html
