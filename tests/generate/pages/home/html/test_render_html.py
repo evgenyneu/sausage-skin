@@ -1,16 +1,15 @@
 from datetime import date as date_type
 from pathlib import Path
 
-from src.generate.pages.home import render_html
+from src.generate.pages.home.html import render_html
 from src.generate.tracks.models.track_info import TrackInfo
-from src.generate.yaml.main import TrackMetadata
+from src.generate.tracks.models.track_metadata import TrackMetadata
 
 
 def test_render_html_writes_output(tmp_path: Path) -> None:
     repo_root = tmp_path
 
     layout_path = repo_root / "src" / "web" / "layout" / "index.html"
-
     layout_path.parent.mkdir(parents=True, exist_ok=True)
     layout_path.write_text("<html><body>{{ body }}</body></html>", encoding="utf-8")
 

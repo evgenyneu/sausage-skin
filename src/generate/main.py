@@ -2,7 +2,7 @@ from pathlib import Path
 from sys import exit as sys_exit
 
 from .errors import ProgramError
-from .pages.home import render_html as render_home_html
+from .pages.home.main import render_html as render_home_html
 from .pages.track.main import render_html_for_tracks
 from .process.main import process_tracks
 from .tracks.main import discover_tracks
