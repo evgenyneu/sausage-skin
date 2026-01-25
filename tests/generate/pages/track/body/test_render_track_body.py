@@ -10,8 +10,18 @@ def test_render_track_body(tmp_path: Path) -> None:
     repo_root = tmp_path
 
     template_path = repo_root / "src" / "generate" / "pages" / "track" / "templates" / "main.html"
+
+    download_template_path = (
+        repo_root / "src" / "generate" / "pages" / "track" / "templates" / "download.html"
+    )
+
     template_path.parent.mkdir(parents=True, exist_ok=True)
+    download_template_path.parent.mkdir(parents=True, exist_ok=True)
     template_path.write_text('<img src="{{ cover_src }}" alt="{{ alt_text }}" />', encoding="utf-8")
+
+    download_template_path.write_text(
+        '<div><a href="audio/track.mp3" download>Download</a></div>', encoding="utf-8"
+    )
 
     track = TrackInfo(
         track_dir=Path("/music/a2024/a01_jan/a01_test"),
@@ -35,17 +45,23 @@ def test_render_track_body_no_links_renders_nothing(tmp_path: Path) -> None:
     repo_root = tmp_path
 
     template_path = repo_root / "src" / "generate" / "pages" / "track" / "templates" / "main.html"
-    template_path.parent.mkdir(parents=True, exist_ok=True)
-    template_path.write_text("<div><p>{{ description }}</p>{{ links }}</div>", encoding="utf-8")
-
+    download_template_path = (
+        repo_root / "src" / "generate" / "pages" / "track" / "templates" / "download.html"
+    )
     link_template_path = (
         repo_root / "src" / "generate" / "pages" / "track" / "templates" / "link.html"
     )
     links_template_path = (
         repo_root / "src" / "generate" / "pages" / "track" / "templates" / "links.html"
     )
+    template_path.parent.mkdir(parents=True, exist_ok=True)
+    download_template_path.parent.mkdir(parents=True, exist_ok=True)
     link_template_path.parent.mkdir(parents=True, exist_ok=True)
     links_template_path.parent.mkdir(parents=True, exist_ok=True)
+    template_path.write_text("<div><p>{{ description }}</p>{{ links }}</div>", encoding="utf-8")
+    download_template_path.write_text(
+        '<div><a href="audio/track.mp3" download>Download</a></div>', encoding="utf-8"
+    )
     link_template_path.write_text('<a href="{{ url }}">{{ label }}</a>', encoding="utf-8")
     links_template_path.write_text("<div>{{ links }}</div>", encoding="utf-8")
 
@@ -63,7 +79,7 @@ def test_render_track_body_no_links_renders_nothing(tmp_path: Path) -> None:
 
     result = render_track_body(track=track, repo_root=repo_root)
 
-    assert "<a" not in result
+    assert "<a" not in result or "Download" in result
     assert "YouTube" not in result
     assert "SoundCloud" not in result
     assert "Bandcamp" not in result
