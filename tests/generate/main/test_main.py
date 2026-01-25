@@ -15,6 +15,7 @@ def test_main_runs_pipeline(tmp_path: Path) -> None:
     template_main_path = (
         repo_root / "src" / "generate" / "pages" / "home" / "templates" / "main.html"
     )
+
     template_track_path = (
         repo_root / "src" / "generate" / "pages" / "home" / "templates" / "track.html"
     )
