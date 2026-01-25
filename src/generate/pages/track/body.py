@@ -1,20 +1,27 @@
 from pathlib import Path
 
 from src.generate.const import ARTIST_NAME
+from src.generate.template.render import read_template, replace_attribute_tag, replace_text_tag
 from src.generate.tracks.models.track_info import TrackInfo
 
 
 def render_track_body(*, track: "TrackInfo", repo_root: Path) -> str:
     template_path = repo_root / "src" / "generate" / "pages" / "track" / "templates" / "main.html"
-    template_html = template_path.read_text(encoding="utf-8")
-
+    template_html = read_template(template_path=template_path)
     cover_path = "images/cover.jpg"
     alt_text = f"{ARTIST_NAME} - {track.metadata.title}"
-
     description_text = track.metadata.description or ""
 
-    body_html = template_html.replace("{{ cover_src }}", cover_path)
-    body_html = body_html.replace("{{ alt_text }}", alt_text)
-    body_html = body_html.replace("{{ description }}", description_text)
+    template_html = replace_attribute_tag(
+        template_html=template_html, tag="cover_src", value=cover_path, escape=True
+    )
 
-    return body_html
+    template_html = replace_attribute_tag(
+        template_html=template_html, tag="alt_text", value=alt_text, escape=True
+    )
+
+    template_html = replace_text_tag(
+        template_html=template_html, tag="description", value=description_text, escape=True
+    )
+
+    return template_html
