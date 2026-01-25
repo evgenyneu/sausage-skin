@@ -1,6 +1,6 @@
 # sausage skin music
 
-A web site for sausage skin music:
+A web site for [sausage skin music](https://evgenii.com/sausage-skin/):
 
 * [music](music) folder - source files (wav, cover images, videos, etc.)
 * [web](web) folder - generated static web site files.
